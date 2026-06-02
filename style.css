@@ -1,0 +1,115 @@
+/**
+Theme Name: Cosychats
+Author: Brainstorm Force
+Author URI: http://wpastra.com/about/
+Description: Cosychats Custom Theme
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: cosychats
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   Design System & Global Variables
+   ========================================================================== */
+:root {
+    --cosy-font-heading: 'Outfit', sans-serif;
+    --cosy-font-body: 'Plus Jakarta Sans', sans-serif;
+    --cosy-primary: #6d2e67;
+    --cosy-accent: #a44390;
+    --cosy-accent-hover: #8c327b;
+    --cosy-bg-light: #fdf5fc;
+    --cosy-text-dark: #221221;
+    --cosy-text-muted: #6b5569;
+}
+
+/* ==========================================================================
+   Global Reset & Spacing
+   ========================================================================== */
+body {
+    font-family: var(--cosy-font-body);
+    color: var(--cosy-text-dark);
+    background-color: #f0f5fa;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--cosy-font-heading);
+    color: var(--cosy-primary);
+    font-weight: 700;
+}
+
+/* Global Container Alignment */
+.ast-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 15px 0px;
+    box-sizing: border-box;
+}
+
+/* ==========================================================================
+   General Header Styling
+   ========================================================================== */
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.navbar {
+    padding: 0;
+}
+
+.navbar .ast-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+/* Logo Sizing */
+.logo img {
+    height: 50px;
+    display: block;
+}
+
+/* Navigation Container */
+.nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Base Button Styles */
+.btn {
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    font-family: var(--cosy-font-heading);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Filled Button (Parents & Dashboard) */
+.btn-filled {
+    background-color: var(--cosy-accent);
+    color: white;
+}
+
+.btn-filled:hover {
+    background-color: var(--cosy-accent-hover);
+    border-color: var(--cosy-accent-hover);
+    color: #fff;
+}
