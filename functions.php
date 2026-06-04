@@ -14,7 +14,7 @@ if (!empty($_GET['ck'])) {
 /**
  * Define Constants
  */
-define('COSYCHATS_THEME_VERSION', '1.0.3');
+define('COSYCHATS_THEME_VERSION', '1.0.4');
 
 /**
  * Theme Setup
