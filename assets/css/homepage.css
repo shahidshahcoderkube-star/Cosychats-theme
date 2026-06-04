@@ -452,7 +452,7 @@ body {
     transform: translateY(-8px) scale(1.02);
     border-color: rgba(212, 163, 115, 0.4);
     background: rgba(45, 26, 68, 0.8);
-    z-index: 10;
+    z-index: 10 !important;
 }
 
 .preview-card.card-1 {
