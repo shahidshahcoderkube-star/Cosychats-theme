@@ -104,28 +104,6 @@ get_header();
         </div>
     </section>
 
-    <!-- SEARCH & KEYWORDS -->
-    <section class="cosy-search-section">
-        <div class="cosy-search-card">
-            <h3 class="cosy-search-heading">Looking for someone with specific experience?</h3>
-            <form action="<?php echo esc_url(site_url('/service-provider')); ?>" method="GET" class="cosy-search-form">
-                <div class="search-input-wrapper">
-                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-                    <input type="text" name="search" placeholder="Search keywords (e.g. ADHD, teen, divorce, toddler)..." required>
-                </div>
-                <button type="submit" class="cosy-search-btn">Search Guides</button>
-            </form>
-            <div class="cosy-popular-tags">
-                <span class="tag-label">Popular Topics:</span>
-                <a href="<?php echo esc_url(site_url('/service-provider/?search=ADHD')); ?>" class="pop-tag">ADHD & ASD</a>
-                <a href="<?php echo esc_url(site_url('/service-provider/?search=teen')); ?>" class="pop-tag">Teenagers</a>
-                <a href="<?php echo esc_url(site_url('/service-provider/?search=newborn')); ?>" class="pop-tag">Newborns</a>
-                <a href="<?php echo esc_url(site_url('/service-provider/?search=divorce')); ?>" class="pop-tag">Divorce</a>
-                <a href="<?php echo esc_url(site_url('/service-provider/?search=adoption')); ?>" class="pop-tag">Adoption</a>
-            </div>
-        </div>
-    </section>
-
     <!-- ===== LOOP STRIP / MARQUEE TICKER ===== -->
     <div class="cosy-ticker-strip" role="marquee" aria-label="Popular conversation topics">
         <span class="cosy-ticker-label">🗣️ Topics</span>
@@ -163,6 +141,43 @@ get_header();
         </div>
     </div>
     <!-- ===== END LOOP STRIP ===== -->
+
+    <!-- SEARCH & KEYWORDS -->
+    <section class="cosy-search-section">
+        <div class="cosy-search-card">
+            <h3 class="cosy-search-heading">Tell Cosy AI what you're going through...</h3>
+            <div class="cosy-ai-container">
+                <form id="cosy-ai-form" class="cosy-search-form" onsubmit="event.preventDefault(); simulateCosyAI();">
+                    <div class="search-input-wrapper">
+                        <!-- AI Sparkle Icon -->
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--cosy-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2v20M2 12h20M12 12c-4-4-10-4-10-4s6 0 10 4zM12 12c4-4 10-4 10-4s-6 0-10 4zM12 12c-4 4-10 4-10 4s6 0 10-4zM12 12c4 4 10 4 10 4s-6 0-10-4z"/>
+                        </svg>
+                        <input type="text" id="ai-query-input" placeholder="E.g., I'm struggling with my teenager's screen time..." required autocomplete="off">
+                    </div>
+                    <button type="submit" class="cosy-search-btn" id="ai-submit-btn">
+                        <span>Ask AI</span>
+                    </button>
+                </form>
+                
+                <!-- Simulated AI Response Area -->
+                <div id="ai-response-area" class="ai-response-hidden">
+                    <div class="ai-typing-indicator" id="ai-typing" style="display: none;">
+                        <span class="ai-dot"></span><span class="ai-dot"></span><span class="ai-dot"></span>
+                        <span class="ai-typing-text">Cosy AI is typing...</span>
+                    </div>
+                    <div class="ai-answer-content" id="ai-answer"></div>
+                </div>
+            </div>
+            
+            <div class="cosy-popular-tags" style="margin-top: 20px;">
+                <span class="tag-label">Try asking:</span>
+                <button type="button" class="pop-tag ai-prompt-btn" onclick="document.getElementById('ai-query-input').value=this.innerText; simulateCosyAI();">My child was just diagnosed with ADHD</button>
+                <button type="button" class="pop-tag ai-prompt-btn" onclick="document.getElementById('ai-query-input').value=this.innerText; simulateCosyAI();">Going through a difficult divorce</button>
+                <button type="button" class="pop-tag ai-prompt-btn" onclick="document.getElementById('ai-query-input').value=this.innerText; simulateCosyAI();">Newborn sleep regression help</button>
+            </div>
+        </div>
+    </section>
 
     <!-- ================================================
          WHAT IS COSYCHATS — Premium Illustrated Cards
@@ -500,5 +515,46 @@ get_header();
     </section>
 </div>
 
-<?php
-get_footer();
+<script>
+function simulateCosyAI() {
+    const input = document.getElementById('ai-query-input').value.trim();
+    if (!input) return;
+
+    const responseArea = document.getElementById('ai-response-area');
+    const typingIndicator = document.getElementById('ai-typing');
+    const answerContent = document.getElementById('ai-answer');
+
+    // Show response area and typing indicator
+    responseArea.classList.remove('ai-response-hidden');
+    responseArea.style.display = 'block';
+    typingIndicator.style.display = 'flex';
+    answerContent.innerHTML = '';
+
+    // Scroll to the response area
+    responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Send query to backend to save in the log file
+    const formData = new FormData();
+    formData.append('action', 'cosy_save_ai_query');
+    formData.append('query', input);
+    
+    fetch(window.cosyAjax.ajaxurl, {
+        method: 'POST',
+        body: formData
+    }).catch(error => console.error('Error saving query:', error));
+
+    // Simulate network delay for thinking
+    setTimeout(() => {
+        typingIndicator.style.display = 'none';
+        
+        // Use the centralized AI Mind knowledge base to generate the answer
+        let responseHTML = window.cosyAIMind.ask(input);
+        
+        // Simulate typing out the response
+        answerContent.innerHTML = responseHTML;
+        
+    }, 1500); // 1.5 seconds thinking time
+}
+</script>
+
+<?php get_footer(); ?>

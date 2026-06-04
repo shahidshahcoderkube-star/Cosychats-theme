@@ -73,7 +73,7 @@ body {
    Loop Strip / Marquee Ticker
    ========================================================================== */
 .cosy-ticker-strip {
-    background: linear-gradient(135deg, var(--cosy-dark-space) 0%, #5c1a56 50%, var(--cosy-dark-space) 100%);
+    background: linear-gradient(135deg, var(--cosy-dark-space) 0%, var(--cosy-primary) 50%, var(--cosy-dark-space) 100%);
     color: #ffffff;
     overflow: hidden;
     padding: 0;
@@ -81,6 +81,8 @@ body {
     height: 44px;
     display: flex;
     align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 /* Fade edge masks */
@@ -273,12 +275,13 @@ body {
 
 .cosy-btn-light {
     background-color: #ffffff;
-    color: var(--cosy-primary);
+    color: var(--cosy-primary) !important;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
 }
 
 .cosy-btn-light:hover {
     background-color: #fbf9f6;
+    color: var(--cosy-primary) !important;
     transform: translateY(-3px);
     box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
 }
@@ -375,7 +378,7 @@ body {
 }
 
 .gradient-text {
-    background: linear-gradient(135deg, #e8b4e0 0%, var(--cosy-accent) 60%, #7c2edb 100%);
+    background: linear-gradient(135deg, var(--cosy-accent-light) 0%, var(--cosy-accent) 55%, var(--cosy-primary) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -401,6 +404,7 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 30px;
     padding-bottom: 30px;
+    margin-bottom: 30px;
     flex-wrap: wrap;
 }
 
@@ -562,11 +566,10 @@ body {
    Search & Quick Topics Section
    ========================================================================== */
 .cosy-search-section {
-    padding: 0 40px;
-    transform: translateY(-50%);
+    padding: 60px 40px 40px;
     position: relative;
     z-index: 10;
-    margin-bottom: -80px;
+    background: var(--cosy-bg-warm);
 }
 
 
@@ -630,7 +633,7 @@ body {
 .cosy-search-btn {
     padding: 18px 38px;
     border-radius: 50px;
-    background: linear-gradient(135deg, var(--cosy-primary) 0%, #461b42 100%);
+    background: linear-gradient(135deg, var(--cosy-primary) 0%, var(--cosy-accent) 100%);
     color: #ffffff;
     border: none;
     font-weight: 700;
@@ -676,6 +679,99 @@ body {
     color: #ffffff;
     border-color: var(--cosy-primary);
     transform: translateY(-1px);
+}
+
+/* AI Interface Additions */
+.ai-prompt-btn {
+    cursor: pointer;
+}
+
+.cosy-ai-container {
+    position: relative;
+    width: 100%;
+}
+
+.ai-response-hidden {
+    display: none;
+}
+
+#ai-response-area {
+    margin-top: 20px;
+    background: #fdf5fc;
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid var(--cosy-border);
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(109, 46, 103, 0.05);
+}
+
+.ai-typing-indicator {
+    font-size: 0.95rem;
+    color: var(--cosy-accent);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ai-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--cosy-accent);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out;
+}
+
+.ai-dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.ai-dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+@keyframes typingBounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+.ai-answer-content {
+    font-size: 1rem;
+    color: var(--cosy-text-dark);
+    line-height: 1.6;
+}
+
+.ai-answer-content p {
+    margin-bottom: 15px;
+}
+
+.ai-answer-content p:last-child {
+    margin-bottom: 0;
+}
+
+.ai-book-btn {
+    display: inline-block;
+    margin-top: 15px;
+    background: var(--cosy-primary);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.ai-book-btn:hover {
+    background: var(--cosy-accent);
+    color: white;
 }
 
 /* ==========================================================================
@@ -739,9 +835,8 @@ body {
    What is CosyChats — Premium Illustrated Cards
    ========================================================================== */
 .cosy-what-is {
-    padding: 100px 40px;
+    padding: 60px 40px 100px 40px;
     background-color: var(--cosy-bg-warm);
-    border-bottom: 1px solid var(--cosy-border-light);
 }
 
 .cosy-illus-grid {
@@ -964,10 +1059,15 @@ body {
    Why CosyChats — Dark Glass Feature Row
    ========================================================================== */
 .cosy-why-us {
-    padding: 100px 40px;
+    max-width: 1320px;
+    margin: 80px auto;
+    border-radius: 40px;
+    padding: 80px 60px;
     background: linear-gradient(135deg, #1f122b 0%, #301740 100%);
     position: relative;
     overflow: hidden;
+    box-shadow: 0 30px 80px rgba(25, 5, 24, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .cosy-why-us::before {
@@ -997,9 +1097,9 @@ body {
 
 .cosy-why-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 30px;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
     position: relative;
     z-index: 1;
@@ -1055,7 +1155,7 @@ body {
    ========================================================================== */
 .cosy-start-conversation {
     padding: 100px 40px;
-    background-color: #fcf9f9;
+    background-color: var(--cosy-bg-warm);
 }
 
 .cosy-topic-grid {
@@ -1204,10 +1304,8 @@ body {
    How It Works Steps Section
    ========================================================================== */
 .cosy-how-it-works {
-    padding: 100px 40px;
+    padding: 80px 40px 100px;
     background-color: #ffffff;
-    border-top: 1px solid var(--cosy-border);
-    border-bottom: 1px solid var(--cosy-border);
 }
 
 .steps-container {
@@ -1360,9 +1458,8 @@ body {
    Testimonials Section
    ========================================================================== */
 .cosy-testimonials {
-    padding: 100px 40px;
-    background-color: #ffffff;
-    border-top: 1px solid var(--cosy-border);
+    padding: 60px 40px 100px 40px;
+    background-color: var(--cosy-bg-warm);
 }
 
 .testimonials-slider {
@@ -1421,8 +1518,13 @@ body {
    CTA Banner Section
    ========================================================================== */
 .cosy-cta-banner {
-    background: linear-gradient(135deg, #3d0a3a 0%, var(--cosy-dark-space) 60%, #2b083b 100%);
-    padding: 100px 40px;
+    max-width: 1320px;
+    margin: 80px auto 100px;
+    border-radius: 40px;
+    background: linear-gradient(135deg, #3d0a3a 0%, var(--cosy-dark-space) 100%);
+    padding: 80px 40px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 80px rgba(25, 5, 24, 0.25);
     text-align: center;
     color: #ffffff;
     position: relative;
@@ -1442,7 +1544,7 @@ body {
 }
 
 .cta-content {
-    max-width: 680px;
+    max-width: 900px;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -1452,6 +1554,7 @@ body {
     font-family: var(--cosy-font-heading);
     font-size: 2.8rem;
     font-weight: 800;
+    color: #ffffff;
     margin-bottom: 20px;
     letter-spacing: -0.02em;
     line-height: 1.2;
