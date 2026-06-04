@@ -50,7 +50,8 @@ function cosy_enqueue_assets()
         wp_enqueue_script('cosy-ai-mind', get_stylesheet_directory_uri() . '/assets/js/ai-mind.js', array(), COSYCHATS_THEME_VERSION, true);
         wp_localize_script('cosy-ai-mind', 'cosyAjax', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
-            'siteUrl' => site_url()
+            'siteUrl' => site_url(),
+            'nonce'   => wp_create_nonce('cosy_ai_query_nonce')
         ));
 	}
 }
@@ -61,11 +62,27 @@ add_action('wp_enqueue_scripts', 'cosy_enqueue_assets', 15);
  * AJAX Handler to save user AI queries
  */
 function cosy_save_ai_query() {
+    // 1. Verify Nonce
+    check_ajax_referer('cosy_ai_query_nonce', 'nonce');
+
     if (isset($_POST['query']) && !empty($_POST['query'])) {
+        // 2. Rate Limiting (max 5 requests per minute per IP)
+        $ip = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field($_SERVER['REMOTE_ADDR']) : '127.0.0.1';
+        $ip_hash = md5($ip);
+        $transient_key = 'cosy_ai_rate_' . $ip_hash;
+        $request_count = intval(get_transient($transient_key));
+
+        if ($request_count >= 5) {
+            wp_send_json_error('Too many requests. Please wait a minute.', 429);
+        }
+        set_transient($transient_key, $request_count + 1, MINUTE_IN_SECONDS);
+
+        // 3. Truncate query length to prevent disk fill-up attacks
         $query = sanitize_text_field($_POST['query']);
+        $query = mb_substr($query, 0, 500);
+
         $log_file = WP_CONTENT_DIR . '/cosy_ai_queries.log';
         $time = current_time('mysql');
-        $ip = $_SERVER['REMOTE_ADDR'];
         
         $log_entry = "[$time] [IP: $ip] Query: $query" . PHP_EOL;
         

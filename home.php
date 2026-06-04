@@ -537,6 +537,7 @@ function simulateCosyAI() {
     const formData = new FormData();
     formData.append('action', 'cosy_save_ai_query');
     formData.append('query', input);
+    formData.append('nonce', window.cosyAjax.nonce);
     
     fetch(window.cosyAjax.ajaxurl, {
         method: 'POST',
