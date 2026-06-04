@@ -54,7 +54,7 @@ h6 {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    padding: 15px 0px;
+    padding: 0px 15px;
     box-sizing: border-box;
 }
 
@@ -71,7 +71,7 @@ header {
     padding: 0;
 }
 
-.navbar .ast-container {
+.ast-container .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -113,4 +113,323 @@ header {
     background-color: var(--cosy-accent-hover);
     border-color: var(--cosy-accent-hover);
     color: #fff;
+}
+
+/* Ensure submenu links are always visible and colored dark purple */
+.cosy-custom-submenu li a,
+.cosy-custom-submenu a,
+.navbar .nav-links ul.main-menu li.cosy-header-dropdown-wrapper .cosy-custom-submenu li a,
+.navbar .nav-links ul.main-menu li.cosy-header-dropdown-wrapper .cosy-custom-submenu a {
+    color: #6d2e67 !important;
+    /* Dark brand purple */
+    background: transparent !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.cosy-custom-submenu li a:hover,
+.cosy-custom-submenu a:hover,
+.navbar .nav-links ul.main-menu li.cosy-header-dropdown-wrapper .cosy-custom-submenu li a:hover {
+    color: #a44390 !important;
+    /* Brand accent purple */
+    background: rgba(109, 46, 103, 0.08) !important;
+}
+
+/* ==========================================================================
+   Mobile & Responsive Navigation
+   ========================================================================== */
+
+/* Hamburger Toggler Button - hidden on desktop */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 28px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1000;
+    outline: none;
+}
+
+.mobile-menu-toggle:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.mobile-menu-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: var(--cosy-primary);
+    border-radius: 4px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Toggled Hamburger State (X shape) */
+.mobile-menu-toggle.active .bar:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.mobile-menu-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+}
+
+/* Ensure the navbar layout is correct */
+.navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    position: relative !important;
+}
+
+/* Desktop styles fallback check */
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex !important;
+    }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+
+    /* Show Hamburger on mobile */
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+
+    /* Hide Navigation Links container by default on mobile */
+    .nav-links {
+        display: none !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        background-color: #ffffff !important;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1) !important;
+        padding: 20px !important;
+        z-index: 9999 !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
+        border-top: 1px solid #f3e8f2 !important;
+        border-radius: 0 0 16px 16px !important;
+        animation: cosyFadeIn 0.3s ease forwards;
+        box-sizing: border-box !important;
+    }
+
+    @keyframes cosyFadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Show Navigation Links container when menu is active */
+    .nav-links.active {
+        display: flex !important;
+    }
+
+    /* Target the list container and list items */
+    .nav-links .menu-primary-container,
+    .nav-links ul.main-menu {
+        width: 100% !important;
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .nav-links ul.main-menu {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+
+    /* Force vertical stacking on all menu items */
+    .nav-links ul.main-menu li {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Fix dropdown wrapper */
+    .nav-links ul.main-menu li.cosy-header-dropdown-wrapper {
+        margin-left: 0 !important;
+        position: relative !important;
+    }
+
+    /* Dropdown Toggle Button on mobile */
+    .nav-links ul.main-menu li.cosy-header-dropdown-wrapper a.cosy-dropdown-toggle {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 12px 20px !important;
+        box-sizing: border-box !important;
+        border-radius: 12px !important;
+    }
+
+    /* Submenu resetting for mobile */
+    .cosy-custom-submenu {
+        position: static !important;
+        display: none !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-left: 4px solid #6d2e67 !important;
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        background: #fdf5fc !important;
+        /* Soft warm pink background */
+        padding: 8px 10px !important;
+        margin-top: 5px !important;
+        border-radius: 8px !important;
+        box-sizing: border-box !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .cosy-custom-submenu li {
+        width: 100% !important;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .cosy-custom-submenu li a {
+        color: #6d2e67 !important;
+        font-weight: 600 !important;
+        display: block !important;
+        padding: 10px 16px !important;
+        text-align: left !important;
+        font-size: 0.95rem !important;
+    }
+
+
+    /* Disable default hover triggers on mobile */
+    .cosy-header-dropdown-wrapper:hover .cosy-custom-submenu {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: none !important;
+    }
+
+    /* Show submenu on mobile ONLY when parent has .open class */
+    .cosy-header-dropdown-wrapper.open .cosy-custom-submenu,
+    .cosy-header-dropdown-wrapper.open:hover .cosy-custom-submenu {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+
+    /* Rotate arrow when open */
+    .cosy-header-dropdown-wrapper.open .cosy-arrow {
+        transform: rotate(180deg) !important;
+    }
+
+    /* Fix Login / Register button list items */
+    .nav-links ul.main-menu li.login-btn-item {
+        margin-left: 0 !important;
+        margin-top: 4px !important;
+    }
+
+    /* Make buttons full width on mobile */
+    .nav-links ul.main-menu li.login-btn-item a.btn {
+        margin-left: 0 !important;
+        width: 100% !important;
+        display: block !important;
+        text-align: center !important;
+        padding: 12px 24px !important;
+        border-radius: 12px !important;
+        box-sizing: border-box !important;
+    }
+}
+
+/* ==========================================================================
+   Premium Registration Popup Modal Custom Styles (Responsive & Centered)
+   ========================================================================== */
+#registerPopup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90% !important;
+    max-width: 480px !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(109, 46, 103, 0.15) !important;
+    box-shadow: 0 25px 60px rgba(109, 46, 103, 0.25) !important;
+    border-radius: 24px !important;
+    z-index: 999999 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+#registerPopup .popup-header {
+    background: linear-gradient(135deg, var(--cosy-primary, #6d2e67) 0%, var(--cosy-accent, #a44390) 100%) !important;
+    color: #ffffff !important;
+    padding: 20px 24px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#registerPopup .cc__choose {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    font-family: var(--cosy-font-heading, sans-serif) !important;
+}
+
+#registerPopup .popup-close {
+    color: #ffffff !important;
+    font-size: 20px !important;
+    opacity: 0.8 !important;
+    transition: opacity 0.2s ease !important;
+    cursor: pointer !important;
+}
+
+#registerPopup .popup-close:hover {
+    opacity: 1 !important;
+}
+
+#registerPopup .popup-body {
+    padding: 30px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    /* Stack vertically */
+    gap: 16px !important;
+    align-items: stretch !important;
+    box-sizing: border-box !important;
+}
+
+#registerPopup .button {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 14px 24px !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    font-size: 1rem !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
 }
