@@ -40,12 +40,9 @@ function cosy_enqueue_assets()
 	if (is_front_page() || is_home() || is_page_template('home.php')) {
 		wp_enqueue_style('cosychats-homepage-css', get_stylesheet_directory_uri() . '/assets/css/homepage.css', array('cosychats-theme-css'), COSYCHATS_THEME_VERSION, 'all');
 
-        // GSAP and ScrollTrigger (Loaded via CDN)
-        wp_enqueue_script('gsap', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', array(), null, true);
-        wp_enqueue_script('gsap-scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', array('gsap'), null, true);
+        // Enqueue Homepage JS
+        wp_enqueue_script('cosy-homepage-js', get_stylesheet_directory_uri() . '/assets/js/homepage.js', array(), COSYCHATS_THEME_VERSION, true);
 
-        // Custom GSAP Animations for Homepage
-        wp_enqueue_script('cosy-homepage-animations', get_stylesheet_directory_uri() . '/assets/js/homepage-gsap.js', array('gsap', 'gsap-scrolltrigger'), COSYCHATS_THEME_VERSION, true);
         // AI Mind Logic
         wp_enqueue_script('cosy-ai-mind', get_stylesheet_directory_uri() . '/assets/js/ai-mind.js', array(), COSYCHATS_THEME_VERSION, true);
         wp_localize_script('cosy-ai-mind', 'cosyAjax', array(

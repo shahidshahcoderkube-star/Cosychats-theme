@@ -1,52 +1,40 @@
-/**
- * CosyChats Premium Homepage Actions
- * Handles smooth scrolling and micro-animations for page content.
- */
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Smooth Scrolling for Internal Links
-    const internalLinks = document.querySelectorAll('a[href^="#"]');
+function simulateCosyAI() {
+    const input = document.getElementById('ai-query-input').value.trim();
+    if (!input) return;
 
-    internalLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            if (targetId === '#') return;
+    const responseArea = document.getElementById('ai-response-area');
+    const typingIndicator = document.getElementById('ai-typing');
+    const answerContent = document.getElementById('ai-answer');
 
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
+    // Show response area and typing indicator
+    responseArea.classList.remove('ai-response-hidden');
+    responseArea.style.display = 'block';
+    typingIndicator.style.display = 'flex';
+    answerContent.innerHTML = '';
 
-    // 2. Scroll Reveal Animations (Intersection Observer)
-    const revealElements = document.querySelectorAll('.feature-card, .step-item, .circle-card, .testimonial-card');
+    // Scroll to the response area
+    responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Add base reveal class
-    revealElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(25px)';
-        el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-    });
+    // Send query to backend to save in the log file
+    const formData = new FormData();
+    formData.append('action', 'cosy_save_ai_query');
+    formData.append('query', input);
+    formData.append('nonce', window.cosyAjax.nonce);
+    
+    fetch(window.cosyAjax.ajaxurl, {
+        method: 'POST',
+        body: formData
+    }).catch(error => console.error('Error saving query:', error));
 
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-                observer.unobserve(el); // Only animate once
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    revealElements.forEach(el => {
-        revealObserver.observe(el);
-    });
-});
+    // Simulate network delay for thinking
+    setTimeout(() => {
+        typingIndicator.style.display = 'none';
+        
+        // Use the centralized AI Mind knowledge base to generate the answer
+        let responseHTML = window.cosyAIMind.ask(input);
+        
+        // Simulate typing out the response
+        answerContent.innerHTML = responseHTML;
+        
+    }, 1500); // 1.5 seconds thinking time
+}
