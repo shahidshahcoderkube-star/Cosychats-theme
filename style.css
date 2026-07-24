@@ -65,6 +65,12 @@ h6 {
     font-family: var(--cosy-font-body);
 }
 
+/* Avoid double padding squeeze when plugin containers are rendered inside page container */
+.cosychats-container .cosy-premium-grid-container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 /* ==========================================================================
    General Header Styling
    ========================================================================== */
