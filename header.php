@@ -25,7 +25,7 @@ if (! defined('ABSPATH')) {
 
     <div id="page" class="hfeed site">
         <header>
-            <div class="cosychats-container">
+            <div class="cosychats-header-container">
                 <div class="navbar">
                     <div class="logo">
                         <a href="<?php echo site_url(); ?>">

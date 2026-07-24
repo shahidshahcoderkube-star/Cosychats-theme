@@ -46,12 +46,21 @@ h6 {
     font-weight: 700;
 }
 
-/* Global Container Alignment */
+/* Header Container Alignment (1400px Wide) */
+.cosychats-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--cosy-font-body);
+}
+
+/* Global Page Container Alignment (1250px Wide) */
 .cosychats-container {
     max-width: 1250px;
     margin: 0 auto;
     width: 100%;
-    padding: 15px 20px;
+    padding: 0px 20px;
     box-sizing: border-box;
     font-family: var(--cosy-font-body);
 }
@@ -69,11 +78,12 @@ header {
     padding: 0;
 }
 
+.cosychats-header-container .navbar,
 .cosychats-container .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 20px;
 }
 
 /* Logo Sizing */
