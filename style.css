@@ -51,6 +51,10 @@ h6 {
 }
 
 /* Block Editor (Gutenberg) Admin Typography Sync */
+.editor-styles-wrapper {
+    background-color: #ffffff !important;
+}
+
 .editor-styles-wrapper,
 .editor-styles-wrapper p,
 .editor-styles-wrapper li,
