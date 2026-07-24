@@ -1,11 +1,9 @@
 /**
 Theme Name: Cosychats
-Author: Brainstorm Force
-Author URI: http://wpastra.com/about/
+Author: Cosychats Team
 Description: Cosychats Custom Theme
 Version: 1.0.0
 License: GNU General Public License v2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: cosychats
 */
 
@@ -31,7 +29,6 @@ Text Domain: cosychats
 body {
     font-family: var(--cosy-font-body);
     color: var(--cosy-text-dark);
-    /* background-color: #f0f5fa; */
     background-color: #f8f0f8;
     margin: 0;
     padding: 0;
@@ -50,19 +47,11 @@ h6 {
 }
 
 /* Global Container Alignment */
-.ast-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    padding: 0px 15px;
-    box-sizing: border-box;
-}
-
 .cosychats-container {
     max-width: 1250px;
     margin: 0 auto;
     width: 100%;
-    padding: 40px 20px;
+    padding: 15px 20px;
     box-sizing: border-box;
     font-family: var(--cosy-font-body);
 }
@@ -80,7 +69,7 @@ header {
     padding: 0;
 }
 
-.ast-container .navbar {
+.cosychats-container .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
