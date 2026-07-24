@@ -1874,22 +1874,20 @@ body {
 }
 
 /* Global Page Container */
-/* .cosychats-container {
+.cosychats-container {
     max-width: 1250px;
     margin: 0 auto;
     width: 100%;
-    padding: 0px 20px;
+    padding: 40px 20px;
     box-sizing: border-box;
     font-family: var(--cosy-font-body, 'Plus Jakarta Sans', sans-serif);
-} */
+}
 
 /* Results / Response Styling */
 .cosy-google-style-home #ai-response-area {
     margin-top: 35px;
-    margin-left: auto;
-    margin-right: auto;
     text-align: left;
-    width: fit-content;
+    width: 100%;
     max-width: 1250px;
     background: #ffffff;
     border-radius: 20px;
@@ -1897,19 +1895,6 @@ body {
     box-shadow: 0 10px 40px rgba(109, 46, 103, 0.04);
     padding: 28px;
     box-sizing: border-box;
-}
-
-.cosy-google-style-home #ai-response-area .cosy-premium-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 25px !important;
-}
-
-.cosy-google-style-home #ai-response-area .cosy-card-v2 {
-    width: 360px !important;
-    max-width: 100% !important;
-    flex: 0 0 360px !important;
 }
 
 .cosy-google-style-home .ai-typing-indicator {
