@@ -58,6 +58,15 @@ h6 {
     box-sizing: border-box;
 }
 
+.cosychats-container {
+    max-width: 1250px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    font-family: var(--cosy-font-body);
+}
+
 /* ==========================================================================
    General Header Styling
    ========================================================================== */
