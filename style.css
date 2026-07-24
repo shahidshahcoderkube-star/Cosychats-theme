@@ -7,14 +7,14 @@ License: GNU General Public License v2 or later
 Text Domain: cosychats
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 /* ==========================================================================
    Design System & Global Variables
    ========================================================================== */
 :root {
     --cosy-font-heading: 'Outfit', sans-serif;
-    --cosy-font-body: 'Plus Jakarta Sans', sans-serif;
+    --cosy-font-body: 'Poppins', sans-serif;
     --cosy-primary: #6d2e67;
     --cosy-accent: #a44390;
     --cosy-accent-hover: #8c327b;
@@ -26,13 +26,18 @@ Text Domain: cosychats
 /* ==========================================================================
    Global Reset & Spacing
    ========================================================================== */
-body {
+body, p, li, label, span {
     font-family: var(--cosy-font-body);
+    font-size: 16px;
+    line-height: 1.65;
     color: var(--cosy-text-dark);
+    margin-top: 0;
+}
+
+body {
     background-color: #f8f0f8;
     margin: 0;
     padding: 0;
-    line-height: 1.6;
 }
 
 h1,
