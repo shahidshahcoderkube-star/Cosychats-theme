@@ -35,20 +35,19 @@ get_header();
             <!-- Buttons Group -->
             <div class="cosy-google-buttons-group">
                 <button type="submit" class="cosy-google-search-btn">Find Parents</button>
-                <a href="<?php echo esc_url(site_url('/service-provider')); ?>" class="cosy-google-browse-btn">All Parents</a>
+                <a href="<?php echo esc_url(site_url('/service-provider')); ?>" class="cosy-google-browse-btn">Experience</a>
             </div>
         </form>
-
-        <!-- Response Area (Hidden by default) -->
-        <div id="ai-response-area" class="ai-response-hidden" style="display: none;">
-            <div id="ai-typing" class="ai-typing-indicator" style="display: none;">
-                <div class="ai-dot"></div>
-                <div class="ai-dot"></div>
-                <div class="ai-dot"></div>
-                <span class="ai-typing-text">Searching...</span>
-            </div>
-            <div id="ai-answer" class="ai-answer-content"></div>
+    </div>
+    <!-- Response Area (Hidden by default) -->
+    <div id="ai-response-area" class="ai-response-hidden" style="display: none;">
+        <div id="ai-typing" class="ai-typing-indicator" style="display: none;">
+            <div class="ai-dot"></div>
+            <div class="ai-dot"></div>
+            <div class="ai-dot"></div>
+            <span class="ai-typing-text">Searching...</span>
         </div>
+        <div id="ai-answer" class="ai-answer-content"></div>
     </div>
 </div>
 
