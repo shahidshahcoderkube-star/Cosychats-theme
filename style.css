@@ -47,7 +47,6 @@ h4,
 h5,
 h6 {
     font-family: var(--cosy-font-heading);
-    color: var(--cosy-primary);
     font-weight: 700;
 }
 
@@ -59,7 +58,6 @@ h6 {
     font-family: 'Poppins', sans-serif !important;
     font-size: 16px !important;
     line-height: 1.65 !important;
-    color: #221221 !important;
 }
 
 .editor-styles-wrapper h1,
@@ -71,7 +69,6 @@ h6 {
 .editor-styles-wrapper .wp-block-heading,
 .editor-styles-wrapper .editor-post-title__input {
     font-family: 'Outfit', sans-serif !important;
-    color: #6d2e67 !important;
     font-weight: 700 !important;
 }
 
