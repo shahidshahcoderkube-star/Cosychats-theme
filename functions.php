@@ -20,8 +20,13 @@ define('COSYCHATS_THEME_VERSION', '1.0.6');
  * Theme Setup
  */
 function cosy_theme_setup() {
-    // Enable support for menus
+    // Enable standard WordPress theme supports
+    add_theme_support('title-tag');
+    add_theme_support('post-thumbnails');
     add_theme_support('menus');
+    add_theme_support('align-wide');
+    add_theme_support('editor-styles');
+    add_editor_style('style.css');
 
     // Register primary menu location
     register_nav_menus(array(
@@ -29,6 +34,15 @@ function cosy_theme_setup() {
     ));
 }
 add_action('after_setup_theme', 'cosy_theme_setup');
+
+/**
+ * Enqueue Google Fonts and Theme Styles in WordPress Block Editor (Gutenberg)
+ */
+function cosy_block_editor_assets() {
+    wp_enqueue_style('cosy-google-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap', array(), null);
+    wp_enqueue_style('cosy-editor-styles', get_stylesheet_directory_uri() . '/style.css', array('cosy-google-fonts'), COSYCHATS_THEME_VERSION);
+}
+add_action('enqueue_block_editor_assets', 'cosy_block_editor_assets');
 
 /**
  * Enqueue styles
