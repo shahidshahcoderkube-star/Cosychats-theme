@@ -89,11 +89,21 @@ h6 {
     font-family: var(--cosy-font-body);
 }
 
-/* Global Page Container Alignment (1250px Wide) */
+/* Theme Standard Page Container Alignment (1250px Wide) */
+.cosychats-theme-page,
 .cosychats-container {
     max-width: 1250px;
     margin: 0 auto;
     width: 100%;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    font-family: var(--cosy-font-body);
+}
+
+/* Plugin Page Container (Full Width / Managed by Plugin Layout) */
+.cosychats-plugin-container {
+    width: 100%;
+    margin: 0 auto;
     padding: 0px 20px;
     box-sizing: border-box;
     font-family: var(--cosy-font-body);
@@ -187,15 +197,29 @@ header {
 }
 
 /* Filled Button (Parents & Dashboard) */
-.btn-filled {
-    background-color: var(--cosy-accent);
-    color: white;
+.btn-filled,
+a.btn-filled,
+.nav-links a.btn-filled,
+.nav-links ul.main-menu li a.btn-filled {
+    background-color: var(--cosy-accent, #a44390) !important;
+    color: #ffffff !important;
 }
 
-.btn-filled:hover {
-    background-color: var(--cosy-accent-hover);
-    border-color: var(--cosy-accent-hover);
-    color: #fff;
+.btn-filled:hover,
+.btn-filled:focus,
+.btn-filled:active,
+.btn-filled:visited,
+a.btn-filled:hover,
+a.btn-filled:focus,
+a.btn-filled:active,
+a.btn-filled:visited,
+.nav-links a.btn-filled:hover,
+.nav-links a.btn-filled:focus,
+.nav-links a.btn-filled:active,
+.nav-links a.btn-filled:visited {
+    background-color: var(--cosy-accent-hover, #6d2e67) !important;
+    border-color: var(--cosy-accent-hover, #6d2e67) !important;
+    color: #ffffff !important;
 }
 
 /* Ensure submenu links are always visible and colored dark purple */
