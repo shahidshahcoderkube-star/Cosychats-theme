@@ -31,7 +31,8 @@ body {
     font-size: 16px;
     line-height: 1.65;
     color: var(--cosy-text-dark);
-    background-color: #f8f0f8;
+    background: linear-gradient(180deg, #ffffff 0%, #fdf5fc 100%) !important;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
 }
@@ -672,4 +673,73 @@ header {
     font-size: 0.9rem;
     color: #8c778a;
     margin: 0;
+}
+
+/* ==========================================================================
+   AJAX Pagination Controls
+   ========================================================================== */
+.cosy-pagination-container {
+    margin-top: 40px;
+}
+
+.cosy-pagination-info {
+    font-family: var(--cosy-font-body);
+    color: var(--cosy-text-muted, #6b5569);
+    font-size: 0.9rem;
+}
+
+.cosy-pagination-nav .pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.cosy-page-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px !important;
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    font-family: var(--cosy-font-body);
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.cosy-page-link:hover:not([disabled]) {
+    background-color: #fdf5fc;
+    border-color: var(--cosy-accent, #a44390);
+    color: var(--cosy-accent, #a44390);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(109, 46, 103, 0.1);
+}
+
+.cosy-page-link.active-page,
+.page-item.active .cosy-page-link {
+    background-color: var(--cosy-primary, #6d2e67) !important;
+    border-color: var(--cosy-primary, #6d2e67) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(109, 46, 103, 0.25);
+}
+
+.page-item.disabled .cosy-page-link,
+.cosy-page-link[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+    color: #94a3b8;
+    box-shadow: none;
 }
