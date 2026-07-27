@@ -18,7 +18,7 @@
                         </a>
                     </div>
                     <p class="footer-about-text">
-                        Conversations begin with shared experiences. Connecting parents with verified specialists.
+                        Conversations begin with shared experiences. Connecting parents with verified parents.
                     </p>
                 </div>
 
