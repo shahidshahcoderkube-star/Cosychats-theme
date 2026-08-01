@@ -30,7 +30,15 @@ function simulateCosyAI() {
 
         if (data.success && data.data && data.data.html && data.data.html.trim() !== '') {
             // Render exact service-provider-grid-template.php HTML cards from plugin
-            answerContent.innerHTML = data.data.html;
+            let searchResultsHtml = data.data.html;
+            searchResultsHtml += `
+                <div class="cosy-browse-all-wrapper text-center my-4 w-100" style="display: flex; justify-content: center; width: 100%; margin-top: 36px; margin-bottom: 30px; grid-column: 1 / -1;">
+                    <a href="${window.cosyAjax.siteUrl}/service-provider/" class="cosy-browse-all-parents-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #a44390 0%, #6d2e67 100%); color: #ffffff; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 4px 15px rgba(164, 67, 144, 0.3); transition: all 0.3s ease;">
+                        Browse All Parents <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            `;
+            answerContent.innerHTML = searchResultsHtml;
         } else {
             // Fallback if no matching profiles found
             answerContent.innerHTML = `

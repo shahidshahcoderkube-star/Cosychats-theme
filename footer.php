@@ -14,11 +14,11 @@
                 <div class="footer-col footer-brand-col">
                     <div class="footer-logo">
                         <a href="<?php echo esc_url(home_url('/')); ?>">
-                            <img src="http://localhost/cosyplugin/wp-content/uploads/2026/07/logo-1.png" alt="Cosy Chats Logo">
+                            <img src="<?php echo esc_url(home_url('/wp-content/uploads/2026/07/logo-1.png')); ?>" alt="Cosy Chats Logo">
                         </a>
                     </div>
                     <p class="footer-about-text">
-                        Conversations begin with shared experiences. Connecting parents with verified parents.
+                        Conversations begin with shared experiences.
                     </p>
                 </div>
 
@@ -28,6 +28,16 @@
                         <span>Conversations</span>
                     </h4>
                     <ul class="footer-links">
+                        <li>
+                            <a href="<?php echo esc_url(home_url('/ai-search/')); ?>">
+                                AI Search
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo esc_url(home_url('/categories/')); ?>">
+                                Browse by Category
+                            </a>
+                        </li>
                         <li>
                             <a href="<?php echo esc_url(home_url('/gift-a-conversation/')); ?>">
                                 Gift a Conversation <span class="cosy-featured-pill">⭐ Featured</span>
@@ -47,9 +57,11 @@
                         <span>Learn More</span>
                     </h4>
                     <ul class="footer-links">
+                        <li><a href="<?php echo esc_url(home_url('/our-story/')); ?>">Our Story</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/how-it-works/')); ?>">How It Works</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/faqs/')); ?>">FAQs</a></li>
                         <li><a href="<?php echo esc_url(home_url('/blog/')); ?>">Blog</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/questions/')); ?>">Questions</a></li>
-                        <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact</a></li>
+                        <li><a href="<?php echo esc_url(home_url('/contact/')); ?>">Contact / Help</a></li>
                     </ul>
                 </div>
 
@@ -59,7 +71,6 @@
                         <span>Legal</span>
                     </h4>
                     <ul class="footer-links">
-                        <li><a href="<?php echo esc_url(home_url('/conversation-guidelines/')); ?>">Conversation Guidelines</a></li>
                         <li><a href="<?php echo esc_url(home_url('/terms-and-conditions/')); ?>">Terms & Conditions</a></li>
                         <li><a href="<?php echo esc_url(home_url('/privacy-policy/')); ?>">Privacy Policy</a></li>
                         <li><a href="<?php echo esc_url(home_url('/cookie-policy/')); ?>">Cookie Policy</a></li>
