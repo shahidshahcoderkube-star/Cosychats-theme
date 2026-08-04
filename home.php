@@ -14,6 +14,7 @@ get_header();
 
 <div class="cosy-home-container cosy-google-style-home">
     <div class="cosy-google-search-wrapper">
+
         <!-- Logo/Title -->
         <div class="cosy-google-logo-area">
             <span class="cosy-google-logo-sparkle">✨</span>
@@ -29,13 +30,10 @@ get_header();
                 </div>
 
                 <!-- Input Field -->
-                <input type="text" id="ai-query-input" placeholder="What experiences would you like to talk about?" required autocomplete="off">
-            </div>
+                <input type="text" id="ai-query-input" placeholder="" required autocomplete="off">
 
-            <!-- Buttons Group -->
-            <div class="cosy-google-buttons-group">
-                <button type="submit" class="cosy-google-search-btn">Find Parents</button>
-                <a href="<?php echo esc_url(site_url('/service-provider')); ?>" class="cosy-google-browse-btn">Experience</a>
+                <!-- Search Button Inside Bar -->
+                <button type="submit" class="cosy-google-inside-search-btn">Search</button>
             </div>
         </form>
     </div>

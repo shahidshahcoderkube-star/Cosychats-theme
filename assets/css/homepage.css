@@ -1723,6 +1723,7 @@ body {
     align-items: center;
     text-align: center;
     z-index: 10;
+    position: relative;
 }
 
 /* Logo/Title */
@@ -1789,7 +1790,7 @@ body {
     border: 1px solid rgba(109, 46, 103, 0.12) !important;
     border-radius: 29px;
     box-shadow: 0 2px 8px rgba(109, 46, 103, 0.03);
-    padding: 0 24px;
+    padding: 0 7px 0 24px;
     box-sizing: border-box;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -1834,6 +1835,33 @@ body {
 .cosy-google-style-home #ai-query-input::placeholder {
     color: #6b5569 !important;
     opacity: 0.65;
+}
+
+/* Search Button Inside Right Side of Search Bar */
+.cosy-google-style-home .cosy-google-inside-search-btn {
+    height: 44px;
+    padding: 0 26px;
+    border-radius: 22px;
+    border: none;
+    background: linear-gradient(135deg, #a44390 0%, #6d2e67 100%);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+    margin-left: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(164, 67, 144, 0.25);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cosy-google-style-home .cosy-google-inside-search-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(164, 67, 144, 0.35);
+    background: linear-gradient(135deg, #b84ba2 0%, #7d3576 100%);
 }
 
 /* Buttons Group */

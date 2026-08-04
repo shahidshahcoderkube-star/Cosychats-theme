@@ -63,3 +63,79 @@ function simulateCosyAI() {
         `;
     });
 }
+
+/**
+ * Ultra-Smooth Typewriter Rotating Search Placeholder
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    const inputEl = document.getElementById('ai-query-input');
+    if (!inputEl) return;
+
+    const topics = [
+        'Teenagers',
+        'ADHD',
+        'Sleep',
+        'IVF',
+        'Autism',
+        'Blended Family',
+        'Baby Loss'
+    ];
+
+    const prefix = 'Try searching: ';
+    let topicIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+    let timeoutId = null;
+
+    function typeEffect() {
+        if (isPaused || (inputEl.value && inputEl.value.trim() !== '')) {
+            return;
+        }
+
+        const currentTopic = topics[topicIndex];
+
+        if (isDeleting) {
+            charIndex--;
+        } else {
+            charIndex++;
+        }
+
+        const displayedText = prefix + currentTopic.substring(0, charIndex);
+        inputEl.setAttribute('placeholder', displayedText);
+
+        let typeSpeed = isDeleting ? 35 : 65;
+
+        if (!isDeleting && charIndex === currentTopic.length) {
+            typeSpeed = 2000; // Hold full topic for 2 seconds
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            topicIndex = (topicIndex + 1) % topics.length;
+            typeSpeed = 350;
+        }
+
+        timeoutId = setTimeout(typeEffect, typeSpeed);
+    }
+
+    typeEffect();
+
+    inputEl.addEventListener('focus', function () {
+        isPaused = true;
+        if (timeoutId) clearTimeout(timeoutId);
+    });
+
+    inputEl.addEventListener('blur', function () {
+        if (!inputEl.value) {
+            isPaused = false;
+            typeEffect();
+        }
+    });
+
+    inputEl.addEventListener('input', function () {
+        if (inputEl.value) {
+            isPaused = true;
+            if (timeoutId) clearTimeout(timeoutId);
+        }
+    });
+});
