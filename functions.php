@@ -61,6 +61,11 @@ function cosy_enqueue_assets()
             'siteUrl' => site_url(),
         ));
 	}
+
+    if (is_page_template('faqs.php')) {
+        wp_enqueue_style('cosychats-faqs-css', get_stylesheet_directory_uri() . '/assets/css/faqs.css', array('cosychats-theme-css'), COSYCHATS_THEME_VERSION, 'all');
+        wp_enqueue_script('cosy-faqs-js', get_stylesheet_directory_uri() . '/assets/js/faqs.js', array('jquery'), COSYCHATS_THEME_VERSION, true);
+    }
 }
 
 add_action('wp_enqueue_scripts', 'cosy_enqueue_assets', 15);

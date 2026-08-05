@@ -1,0 +1,195 @@
+/**
+ * CosyChats - FAQs Page Stylesheet
+ */
+
+
+.cosy-faq-main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+}
+
+.cosy-faq-title {
+    font-family: 'Plus Jakarta Sans', 'Outfit', sans-serif;
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #6d2e67;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: -0.5px;
+}
+
+.cosy-faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cosy-faq-item {
+    background: #ffffff;
+    border: 1.5px solid #f1f5f9;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.cosy-faq-item:hover {
+    border-color: rgba(164, 67, 144, 0.3);
+    box-shadow: 0 6px 20px rgba(164, 67, 144, 0.08);
+}
+
+.cosy-faq-item.active {
+    border-color: #a44390;
+    box-shadow: 0 8px 24px rgba(164, 67, 144, 0.12);
+}
+
+.cosy-faq-question {
+    padding: 20px 24px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    user-select: none;
+    transition: color 0.2s ease;
+}
+
+.cosy-faq-item.active .cosy-faq-question {
+    color: #a44390;
+}
+
+.cosy-faq-toggle-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fdf5fc;
+    color: #a44390;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.cosy-faq-toggle-icon svg {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.3s ease;
+}
+
+.cosy-faq-item.active .cosy-faq-toggle-icon {
+    transform: rotate(180deg);
+    background: #a44390;
+    color: #ffffff;
+}
+
+.cosy-faq-answer {
+    display: none;
+    padding: 0 24px 24px;
+    color: #475569;
+    font-size: 0.98rem;
+    line-height: 1.7;
+    border-top: 1px dashed #f1f5f9;
+    margin-top: 4px;
+}
+
+.cosy-faq-answer p {
+    margin-top: 14px;
+    margin-bottom: 0;
+}
+
+.cosy-faq-answer p:first-child {
+    margin-top: 18px;
+}
+
+.cosy-faq-answer strong {
+    color: #1e293b;
+    font-weight: 700;
+}
+
+.cosy-faq-answer ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+}
+
+.cosy-faq-answer li {
+    margin-bottom: 6px;
+}
+
+.cosy-faq-answer a {
+    color: #a44390;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.cosy-faq-answer a:hover {
+    color: #6d2e67;
+}
+
+/* Contact Box at Bottom */
+.cosy-faq-contact-card {
+    margin-top: 48px;
+    background: linear-gradient(135deg, #6d2e67 0%, #a44390 100%);
+    border-radius: 20px;
+    padding: 36px 30px;
+    color: #ffffff;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(109, 46, 103, 0.25);
+}
+
+.cosy-faq-contact-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.cosy-faq-contact-card p {
+    font-size: 1rem;
+    opacity: 0.9;
+    max-width: 540px;
+    margin: 0 auto 22px;
+    line-height: 1.5;
+}
+
+.cosy-faq-contact-card .btn-contact {
+    display: inline-block;
+    background: #ffffff;
+    color: #6d2e67;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cosy-faq-contact-card .btn-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    background: #fdf5fc;
+    color: #a44390;
+}
+
+@media (max-width: 768px) {
+    .cosy-faq-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .cosy-faq-question {
+        font-size: 0.98rem;
+        padding: 16px 18px;
+    }
+
+    .cosy-faq-answer {
+        padding: 0 18px 18px;
+        font-size: 0.92rem;
+    }
+}
