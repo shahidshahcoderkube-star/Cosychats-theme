@@ -18,7 +18,7 @@
                         </a>
                     </div>
                     <p class="footer-about-text">
-                        Conversations begin with shared experiences.
+                        Private, one-to-one conversations between parents, built around shared lived experiences.
                     </p>
                 </div>
 
@@ -30,7 +30,7 @@
                     <ul class="footer-links">
                         <li>
                             <a href="<?php echo esc_url(home_url('/ai-search/')); ?>">
-                                AI Search
+                                Search
                             </a>
                         </li>
                         <li>
@@ -45,7 +45,7 @@
                         </li>
                         <li>
                             <a href="<?php echo esc_url(home_url('/share-your-experiences/')); ?>">
-                                Share Your Experiences
+                                Become a CosyChats Parent
                             </a>
                         </li>
                     </ul>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; <?php echo date('Y'); ?> Cosychats. All rights reserved.</p>
+                <p>&copy; <?php echo date('Y'); ?> Cosychats.</p>
             </div>
         </div>
     </footer>
