@@ -17,7 +17,7 @@ get_header();
 
         <!-- Logo/Title -->
         <div class="cosy-google-logo-area">
-            <span class="cosy-google-logo-sparkle">✨</span>
+            <!-- <span class="cosy-google-logo-sparkle">✨</span> -->
             <h1 class="cosy-google-logo-text">Conversations begin with shared experiences.</h1>
         </div>
 
