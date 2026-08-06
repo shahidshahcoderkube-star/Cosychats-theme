@@ -26,15 +26,25 @@ Text Domain: cosychats
 /* ==========================================================================
    Global Reset & Spacing
    ========================================================================== */
-body {
+body:not(.wp-admin):not(.mce-content-body) {
     font-family: var(--cosy-font-body);
     font-size: 16px;
     line-height: 1.65;
     color: var(--cosy-text-dark);
-    background: linear-gradient(360deg, #ffffff 0%, #fdf5fc 100%) !important;
+    background: linear-gradient(360deg, #ffffff 0%, #fdf5fc 100%);
     background-attachment: fixed;
     margin: 0;
     padding: 0;
+}
+
+/* Reset WordPress Admin & TinyMCE Editor background to clean white */
+body.wp-admin,
+body.mce-content-body,
+#tinymce,
+.mce-content-body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
 }
 
 p {

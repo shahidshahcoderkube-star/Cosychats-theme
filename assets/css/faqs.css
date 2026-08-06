@@ -55,7 +55,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    user-select: none;
+    user-select: auto;
     transition: color 0.2s ease;
 }
 
