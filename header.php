@@ -29,7 +29,7 @@ if (! defined('ABSPATH')) {
                 <div class="navbar">
                     <div class="logo">
                         <a href="<?php echo site_url(); ?>">
-                            <img src="https://cosychats.com/wp-content/uploads/2024/10/logo.png" alt="Cosy Chats Logo">
+                            <img src="http://localhost/cosyplugin/wp-content/uploads/2026/08/cosychats-logo.png" alt="Cosy Chats Logo">
                         </a>
                     </div>
 
