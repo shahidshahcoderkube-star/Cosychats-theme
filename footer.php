@@ -14,7 +14,7 @@
                 <div class="footer-col footer-brand-col">
                     <div class="footer-logo">
                         <a href="<?php echo esc_url(home_url('/')); ?>">
-                            <img src="<?php echo esc_url(home_url('/wp-content/uploads/2026/07/logo-1.png')); ?>" alt="Cosy Chats Logo">
+                            <img src="<?php echo cosychats_get_footer_logo_url(); ?>" alt="<?php bloginfo('name'); ?> Footer Logo">
                         </a>
                     </div>
                     <p class="footer-about-text">

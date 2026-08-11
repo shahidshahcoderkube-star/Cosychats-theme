@@ -50,6 +50,7 @@ add_action('enqueue_block_editor_assets', 'cosy_block_editor_assets');
 function cosy_enqueue_assets()
 {
 	wp_enqueue_style('cosychats-theme-css', get_stylesheet_directory_uri() . '/style.css', array(), COSYCHATS_THEME_VERSION, 'all');
+	wp_enqueue_script('cosy-header-js', get_stylesheet_directory_uri() . '/assets/js/header.js', array(), COSYCHATS_THEME_VERSION, true);
 
 	if (is_front_page() || is_home() || is_page_template('home.php')) {
 		wp_enqueue_style('cosychats-homepage-css', get_stylesheet_directory_uri() . '/assets/css/homepage.css', array('cosychats-theme-css'), COSYCHATS_THEME_VERSION, 'all');
@@ -69,4 +70,78 @@ function cosy_enqueue_assets()
 }
 
 add_action('wp_enqueue_scripts', 'cosy_enqueue_assets', 15);
+
+/**
+ * Register Customizer Settings for Header and Footer Logos
+ */
+function cosy_customize_register($wp_customize) {
+    // Add Logos Section
+    $wp_customize->add_section('cosy_logo_section', array(
+        'title'       => __('Header & Footer Logos', 'cosychats'),
+        'priority'    => 25,
+        'description' => __('Manage and customize the logo images displayed in the website header and footer.', 'cosychats'),
+    ));
+
+    // Header Logo Setting
+    $wp_customize->add_setting('custom_header_logo', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'custom_header_logo', array(
+        'label'       => __('Header Logo', 'cosychats'),
+        'description' => __('Upload custom logo for the main navigation header.', 'cosychats'),
+        'section'     => 'cosy_logo_section',
+        'settings'    => 'custom_header_logo',
+    )));
+
+    // Footer Logo Setting
+    $wp_customize->add_setting('custom_footer_logo', array(
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+        'transport'         => 'refresh',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'custom_footer_logo', array(
+        'label'       => __('Footer Logo', 'cosychats'),
+        'description' => __('Upload custom logo for the website footer.', 'cosychats'),
+        'section'     => 'cosy_logo_section',
+        'settings'    => 'custom_footer_logo',
+    )));
+}
+add_action('customize_register', 'cosy_customize_register');
+
+/**
+ * Helper function: Retrieve Header Logo URL
+ */
+function cosychats_get_header_logo_url() {
+    $custom_logo = get_theme_mod('custom_header_logo');
+    if (!empty($custom_logo)) {
+        return esc_url($custom_logo);
+    }
+    // WP standard custom_logo fallback
+    $custom_logo_id = get_theme_mod('custom_logo');
+    if ($custom_logo_id) {
+        $image = wp_get_attachment_image_src($custom_logo_id, 'full');
+        if (!empty($image[0])) {
+            return esc_url($image[0]);
+        }
+    }
+    // Default fallback
+    return esc_url(home_url('/wp-content/uploads/2026/08/cosychats-logo.png'));
+}
+
+/**
+ * Helper function: Retrieve Footer Logo URL
+ */
+function cosychats_get_footer_logo_url() {
+    $custom_footer_logo = get_theme_mod('custom_footer_logo');
+    if (!empty($custom_footer_logo)) {
+        return esc_url($custom_footer_logo);
+    }
+    // Default fallback
+    return esc_url(home_url('/wp-content/uploads/2026/07/logo-1.png'));
+}
+
 
