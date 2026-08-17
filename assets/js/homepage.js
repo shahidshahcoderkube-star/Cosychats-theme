@@ -1,3 +1,37 @@
+/**
+ * HOMEPAGE AI SEARCH & UI CONTROLLER
+ * 
+ * USE CASE:
+ * Controls the interactive AI Natural Language Search on the Cosychats Homepage banner,
+ * including typewriter placeholder animation and AJAX rendering of AI-matched provider cards.
+ * 
+ * HOW TO USE:
+ * Loaded automatically on homepage rendering. `simulateCosyAI()` is triggered when user submits
+ * a search query via search bar button or press of Enter key.
+ * 
+ * WHAT IT DOES INTERNALLY:
+ * 1. `simulateCosyAI()`: Sends user input to `cosy_ai_search` AJAX endpoint, displays typing indicator,
+ *    and dynamically injects semantic matching provider cards or fallback empty state.
+ * 2. `typeEffect()`: Animates rotating typewriter search placeholder terms (e.g. Teenagers, IVF, ADHD).
+ */
+
+/**
+ * EXECUTE HOMEPAGE AI SEARCH QUERY
+ * 
+ * USE CASE:
+ * Fetches AI semantic search results from plugin backend when user types query on homepage.
+ * 
+ * HOW TO USE:
+ * Triggered on click of "Ask AI" / Search button or form submission on homepage hero section.
+ * 
+ * WHAT IT DOES INTERNALLY:
+ * 1. Validates and trims search query string from #ai-query-input.
+ * 2. Unhides #ai-response-area container and shows typing indicator animation.
+ * 3. Scrolls browser viewport smoothly to response container.
+ * 4. Posts FormData with action 'cosy_ai_search' to WordPress AJAX endpoint.
+ * 5. On success: Injects matching provider card HTML from plugin's SearchController.
+ * 6. On empty/error: Shows friendly fallback banner with "Browse All Parent Guides" button.
+ */
 function simulateCosyAI() {
     const input = document.getElementById('ai-query-input').value.trim();
     if (!input) return;
@@ -6,30 +40,32 @@ function simulateCosyAI() {
     const typingIndicator = document.getElementById('ai-typing');
     const answerContent = document.getElementById('ai-answer');
 
-    // Show response area and typing indicator
+    // 1. Display response wrapper and activate typing shimmer indicator
     responseArea.classList.remove('ai-response-hidden');
     responseArea.style.display = 'block';
     typingIndicator.style.display = 'flex';
     answerContent.innerHTML = '';
 
-    // Scroll smoothly to response area
+    // 2. Smoothly scroll browser window down to the AI answer section
     responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Send search query to AI Search Engine Endpoint
+    // 3. Construct AJAX FormData payload for WordPress action 'cosy_ai_search'
     const formData = new FormData();
     formData.append('action', 'cosy_ai_search');
     formData.append('query', input);
 
+    // 4. Send asynchronous request to WordPress AJAX endpoint (cosyAjax.ajaxurl)
     fetch(window.cosyAjax.ajaxurl, {
         method: 'POST',
         body: formData
     })
     .then(res => res.json())
     .then(data => {
+        // Hide typing animation once server response returns
         typingIndicator.style.display = 'none';
 
         if (data.success && data.data && data.data.html && data.data.html.trim() !== '') {
-            // Render exact service-provider-grid-template.php HTML cards from plugin
+            // 5. Render matching service provider cards returned by AI Search Engine
             let searchResultsHtml = data.data.html;
             searchResultsHtml += `
                 <div class="cosy-browse-all-wrapper text-center my-4 w-100" style="display: flex; justify-content: center; width: 100%; margin-top: 36px; margin-bottom: 30px; grid-column: 1 / -1;">
@@ -40,7 +76,7 @@ function simulateCosyAI() {
             `;
             answerContent.innerHTML = searchResultsHtml;
         } else {
-            // Fallback if no matching profiles found
+            // 6. Display fallback notice if AI finds zero relevant providers matching query
             answerContent.innerHTML = `
                 <div class="no-providers-found text-center py-5 w-100" style="background: #fdfdfd; border: 1px dashed #d1d5db; border-radius: 12px; padding: 30px;">
                     <i class="fas fa-search fa-3x mb-3" style="color: #9ca3af;"></i>
@@ -65,7 +101,18 @@ function simulateCosyAI() {
 }
 
 /**
- * Ultra-Smooth Typewriter Rotating Search Placeholder
+ * TYPEWRITER ROTATING SEARCH PLACEHOLDER ANIMATION
+ * 
+ * USE CASE:
+ * Animates realistic typing effect inside the homepage search bar placeholder to suggest search terms.
+ * 
+ * HOW TO USE:
+ * Starts automatically on DOMContentLoaded event. Pauses when user focuses or types into search bar.
+ * 
+ * WHAT IT DOES INTERNALLY:
+ * 1. Cycles through topics array (Teenagers, ADHD, Sleep, IVF, Autism, Blended Family, Baby Loss).
+ * 2. Appends characters one-by-one with 65ms delay to create typing effect.
+ * 3. Holds full word for 2000ms before deleting with 35ms backspace animation.
  */
 document.addEventListener('DOMContentLoaded', function () {
     const inputEl = document.getElementById('ai-query-input');
@@ -118,13 +165,16 @@ document.addEventListener('DOMContentLoaded', function () {
         timeoutId = setTimeout(typeEffect, typeSpeed);
     }
 
+    // Start typewriter loop on load
     typeEffect();
 
+    // Pause animation when user clicks/focuses inside the search input
     inputEl.addEventListener('focus', function () {
         isPaused = true;
         if (timeoutId) clearTimeout(timeoutId);
     });
 
+    // Resume animation when user leaves input field empty
     inputEl.addEventListener('blur', function () {
         if (!inputEl.value) {
             isPaused = false;
@@ -132,6 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Stop animation when user starts typing custom query text
     inputEl.addEventListener('input', function () {
         if (inputEl.value) {
             isPaused = true;
