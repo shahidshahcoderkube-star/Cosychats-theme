@@ -55,11 +55,26 @@ function cosy_enqueue_assets()
 	if (is_front_page() || is_home() || is_page_template('home.php')) {
 		wp_enqueue_style('cosychats-homepage-css', get_stylesheet_directory_uri() . '/assets/css/homepage.css', array('cosychats-theme-css'), COSYCHATS_THEME_VERSION, 'all');
 
-        // Enqueue Homepage JS
+        // Enqueue Homepage JS & dynamically fetch published cosy_service titles for search placeholder
+        $dynamic_topics = array();
+        if (post_type_exists('cosy_service')) {
+            $services = get_posts(array(
+                'post_type'      => 'cosy_service',
+                'posts_per_page' => 15,
+                'post_status'    => 'publish',
+                'orderby'        => 'title',
+                'order'          => 'ASC',
+            ));
+            foreach ($services as $service) {
+                $dynamic_topics[] = $service->post_title;
+            }
+        }
+
         wp_enqueue_script('cosy-homepage-js', get_stylesheet_directory_uri() . '/assets/js/homepage.js', array(), COSYCHATS_THEME_VERSION, true);
         wp_localize_script('cosy-homepage-js', 'cosyAjax', array(
             'ajaxurl' => admin_url('admin-ajax.php'),
             'siteUrl' => site_url(),
+            'topics'  => $dynamic_topics,
         ));
 	}
 

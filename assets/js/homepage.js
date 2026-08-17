@@ -118,15 +118,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputEl = document.getElementById('ai-query-input');
     if (!inputEl) return;
 
-    const topics = [
-        'Teenagers',
-        'ADHD',
-        'Sleep',
-        'IVF',
-        'Autism',
-        'Blended Family',
-        'Baby Loss'
-    ];
+    // Dynamically retrieve published service titles from WordPress database via cosyAjax
+    const topics = (window.cosyAjax && Array.isArray(window.cosyAjax.topics)) ? window.cosyAjax.topics : [];
+
+    // If no dynamic services exist in DB yet, display clean static placeholder and return
+    if (topics.length === 0) {
+        inputEl.setAttribute('placeholder', 'Try searching for guides or services...');
+        return;
+    }
 
     const prefix = 'Try searching: ';
     let topicIndex = 0;
