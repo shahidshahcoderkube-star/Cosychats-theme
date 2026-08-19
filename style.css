@@ -26,6 +26,12 @@ Text Domain: cosychats
 /* ==========================================================================
    Global Reset & Spacing
    ========================================================================== */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body:not(.wp-admin):not(.mce-content-body) {
     font-family: var(--cosy-font-body);
     font-size: 16px;
@@ -35,6 +41,8 @@ body:not(.wp-admin):not(.mce-content-body) {
     background-attachment: fixed;
     margin: 0;
     padding: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 /* Reset WordPress Admin & TinyMCE Editor background to clean white */
@@ -54,14 +62,60 @@ p {
     margin-top: 0;
 }
 
+/* ==========================================================================
+   Global Typography Scale (H1 - H6)
+   ========================================================================== */
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
-    font-family: var(--cosy-font-heading);
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
     font-weight: 700;
+    color: var(--cosy-primary, #6d2e67);
+    line-height: 1.25;
+    margin-top: 0;
+    word-break: break-word;
+}
+
+h1,
+.h1,
+.entry-title,
+.page-title,
+.cosy-faq-title {
+    font-size: clamp(1.45rem, 5.2vw, 2.5rem);
+}
+
+h2,
+.h2 {
+    font-size: clamp(1.3rem, 4.2vw, 2.0rem);
+}
+
+h3,
+.h3 {
+    font-size: clamp(1.15rem, 3.4vw, 1.65rem);
+}
+
+h4,
+.h4 {
+    font-size: clamp(1.02rem, 2.6vw, 1.35rem);
+}
+
+h5,
+.h5 {
+    font-size: clamp(0.92rem, 2.0vw, 1.15rem);
+}
+
+h6,
+.h6 {
+    font-size: clamp(0.85rem, 1.6vw, 1.0rem);
 }
 
 /* Block Editor (Gutenberg) Admin Typography Sync */
@@ -95,6 +149,7 @@ h6 {
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
+    /* padding: 0 20px; */
     box-sizing: border-box;
     font-family: var(--cosy-font-body);
 }
@@ -126,10 +181,17 @@ h6 {
 header {
     background-color: #fff;
     border-bottom: 1px solid #f0f0f0;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 999;
 }
 
 .navbar {
-    padding: 0;
+    padding: 15px 0;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .cosychats-header-container .navbar,
@@ -137,12 +199,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 15px !important;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Logo Sizing */
-.logo img {
-    height: 50px;
+/* Logo Sizing (Header & Footer Synced) */
+.logo img,
+.footer-logo img {
+    height: clamp(38px, 4vw, 50px);
+    width: auto;
     display: block;
 }
 
@@ -279,7 +345,7 @@ a.btn-filled:visited,
 .mobile-menu-toggle .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--cosy-primary);
+    background-color: var(--cosy-primary, #6d2e67) !important;
     border-radius: 4px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -307,22 +373,29 @@ a.btn-filled:visited,
     position: relative !important;
 }
 
-/* Desktop styles fallback check */
-@media (min-width: 769px) {
+/* Desktop styles fallback check (> 991px) */
+@media (min-width: 992px) {
     .nav-links {
         display: flex !important;
     }
+
+    .mobile-menu-toggle {
+        display: none !important;
+    }
 }
 
-/* Mobile Breakpoint */
-@media (max-width: 768px) {
+/* Mobile & Tablet Navigation Breakpoint (<= 991px) */
+@media (max-width: 991px) {
 
-    /* Show Hamburger on mobile */
+    /* Show Hamburger on mobile & tablet */
     .mobile-menu-toggle {
         display: flex !important;
+        margin-left: auto !important;
+        flex-shrink: 0 !important;
+        z-index: 10000 !important;
     }
 
-    /* Hide Navigation Links container by default on mobile */
+    /* Hide Navigation Links container by default on mobile & tablet */
     .nav-links {
         display: none !important;
         position: absolute !important;
@@ -563,7 +636,7 @@ a.btn-filled:visited,
 .cosychats-footer-container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
     box-sizing: border-box;
 }
 
@@ -585,6 +658,21 @@ a.btn-filled:visited,
     .footer-columns {
         grid-template-columns: 1fr;
     }
+
+    .logo img,
+    .footer-logo img {
+        height: 38px !important;
+    }
+
+    .cosychats-header-container .navbar,
+    .navbar {
+        padding: 15px !important;
+    }
+
+    .cosychats-theme-page,
+    .cosychats-container {
+        padding: 30px 15px !important;
+    }
 }
 
 .footer-brand-col {
@@ -592,7 +680,8 @@ a.btn-filled:visited,
 }
 
 .footer-logo img {
-    height: 48px;
+    height: clamp(38px, 4vw, 50px);
+    width: auto;
     display: block;
     margin-bottom: 16px;
 }
@@ -776,4 +865,35 @@ a.btn-filled:visited,
     border-color: #e2e8f0;
     color: #94a3b8;
     box-shadow: none;
+}
+
+/* ==========================================================================
+   GLOBAL MOBILE RESPONSIVENESS OVERRIDES
+   ========================================================================== */
+html,
+body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+}
+
+img,
+video,
+iframe,
+svg {
+    max-width: 100% !important;
+    /* height: auto !important; */
+}
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 40px 0 20px 0 !important;
+    }
+
+    .footer-columns {
+        gap: 25px !important;
+    }
+
+    .footer-about-text {
+        max-width: 100% !important;
+    }
 }
