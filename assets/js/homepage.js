@@ -75,9 +75,13 @@ function simulateCosyAI() {
                 </div>
             `;
             answerContent.innerHTML = searchResultsHtml;
+            try {
+                sessionStorage.setItem('cosy_ai_query', input);
+                sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
+            } catch (e) {}
         } else {
             // 6. Display fallback notice if AI finds zero relevant providers matching query
-            answerContent.innerHTML = `
+            const fallbackHtml = `
                 <div class="no-providers-found text-center py-5 w-100" style="background: #fdfdfd; border: 1px dashed #d1d5db; border-radius: 12px; padding: 30px;">
                     <i class="fas fa-search fa-3x mb-3" style="color: #9ca3af;"></i>
                     <h3 style="color: #4b5563; font-weight: 600; font-size: 1.25rem;">No Specific Guides Found</h3>
@@ -87,6 +91,11 @@ function simulateCosyAI() {
                     </a>
                 </div>
             `;
+            answerContent.innerHTML = fallbackHtml;
+            try {
+                sessionStorage.setItem('cosy_ai_query', input);
+                sessionStorage.setItem('cosy_ai_html', fallbackHtml);
+            } catch (e) {}
         }
     })
     .catch(err => {
@@ -116,6 +125,38 @@ function simulateCosyAI() {
  */
 document.addEventListener('DOMContentLoaded', function () {
     const inputEl = document.getElementById('ai-query-input');
+    
+    // Detect if page was loaded via BROWSER BACK / FORWARD button vs FRESH RELOAD / REFRESH
+    const navEntries = (window.performance && window.performance.getEntriesByType) ? window.performance.getEntriesByType('navigation') : [];
+    const isBackNavigation = (navEntries.length > 0 && navEntries[0].type === 'back_forward') || 
+                             (window.performance && window.performance.navigation && window.performance.navigation.type === 2);
+
+    if (isBackNavigation) {
+        // Auto-restore previous AI search state ONLY if returning via Back button
+        try {
+            const savedQuery = sessionStorage.getItem('cosy_ai_query');
+            const savedHtml = sessionStorage.getItem('cosy_ai_html');
+            if (savedQuery && savedHtml) {
+                if (inputEl) inputEl.value = savedQuery;
+                const responseArea = document.getElementById('ai-response-area');
+                const typingIndicator = document.getElementById('ai-typing');
+                const answerContent = document.getElementById('ai-answer');
+                if (responseArea && answerContent) {
+                    responseArea.classList.remove('ai-response-hidden');
+                    responseArea.style.display = 'block';
+                    if (typingIndicator) typingIndicator.style.display = 'none';
+                    answerContent.innerHTML = savedHtml;
+                }
+            }
+        } catch (e) {}
+    } else {
+        // Clear saved search state on fresh page load or manual refresh (F5)
+        try {
+            sessionStorage.removeItem('cosy_ai_query');
+            sessionStorage.removeItem('cosy_ai_html');
+        } catch (e) {}
+    }
+
     if (!inputEl) return;
 
     // Dynamically retrieve published service titles from WordPress database via cosyAjax

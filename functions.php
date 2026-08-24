@@ -82,6 +82,10 @@ function cosy_enqueue_assets()
         wp_enqueue_style('cosychats-faqs-css', get_stylesheet_directory_uri() . '/assets/css/faqs.css', array('cosychats-theme-css'), COSYCHATS_THEME_VERSION, 'all');
         wp_enqueue_script('cosy-faqs-js', get_stylesheet_directory_uri() . '/assets/js/faqs.js', array('jquery'), COSYCHATS_THEME_VERSION, true);
     }
+
+    if (is_404()) {
+        wp_enqueue_style('cosychats-404-css', get_stylesheet_directory_uri() . '/assets/css/404.css', array('cosychats-theme-css'), COSYCHATS_THEME_VERSION, 'all');
+    }
 }
 
 add_action('wp_enqueue_scripts', 'cosy_enqueue_assets', 15);

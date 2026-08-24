@@ -1,0 +1,107 @@
+/* ==========================================================================
+   404 PAGE TEMPLATE STYLES
+   ========================================================================== */
+.cosy-404-wrapper {
+    min-height: calc(100vh - 280px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    background: radial-gradient(circle at 50% 20%, rgba(164, 67, 144, 0.08) 0%, rgba(255, 255, 255, 1) 70%);
+    position: relative;
+    overflow: hidden;
+}
+
+.cosy-404-card {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(164, 67, 144, 0.15);
+    border-radius: 28px;
+    padding: 50px 36px;
+    box-shadow: 0 20px 50px rgba(164, 67, 144, 0.08);
+    position: relative;
+    z-index: 2;
+}
+
+.cosy-404-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(164, 67, 144, 0.12) 0%, rgba(109, 46, 103, 0.12) 100%);
+    color: #a44390;
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 18px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    border: 1px solid rgba(164, 67, 144, 0.2);
+}
+
+.cosy-404-number {
+    font-size: 5.5rem;
+    font-weight: 900;
+    line-height: 1;
+    background: linear-gradient(135deg, #a44390 0%, #6d2e67 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+}
+
+.cosy-404-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: #1f2937;
+    margin-bottom: 14px;
+}
+
+.cosy-404-desc {
+    font-size: 1rem;
+    color: #6b7280;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+}
+
+.cosy-404-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.cosy-btn-home {
+    background: linear-gradient(135deg, #a44390 0%, #6d2e67 100%);
+    color: #ffffff !important;
+    padding: 14px 38px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none !important;
+    box-shadow: 0 6px 20px rgba(164, 67, 144, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cosy-btn-home:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(164, 67, 144, 0.4);
+}
+
+@media (max-width: 576px) {
+    .cosy-404-number {
+        font-size: 4rem;
+    }
+    .cosy-404-title {
+        font-size: 1.4rem;
+    }
+    .cosy-404-card {
+        padding: 36px 20px;
+    }
+}
