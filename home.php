@@ -18,7 +18,7 @@ get_header();
         <!-- Logo/Title -->
         <div class="cosy-google-logo-area">
             <!-- <span class="cosy-google-logo-sparkle">✨</span> -->
-            <h1 class="cosy-google-logo-text">Start with an experience</h1>
+            <h1 class="cosy-google-logo-text"><?php echo get_field('cosy_home_heading', get_the_ID()); ?></h1>
         </div>
 
         <!-- Search Form -->
