@@ -41,8 +41,10 @@
                                 <?php while (have_rows('conversations_page', 'option')) : the_row();
                                     $link = get_sub_field('conversations_links');
                                     if (!empty($link)) :
-                                        $link_url    = is_array($link) ? esc_url($link['url']) : esc_url($link);
-                                        $link_title  = is_array($link) ? esc_html($link['title']) : esc_html($link);
+                                        $raw_url     = is_array($link) ? ($link['url'] ?? '') : $link;
+                                        $raw_url     = trim((string)$raw_url);
+                                        $link_url    = !empty($raw_url) ? esc_url($raw_url) : 'javascript:void(0);';
+                                        $link_title  = is_array($link) ? esc_html($link['title'] ?? '') : esc_html($link);
                                         $link_target = (is_array($link) && !empty($link['target'])) ? esc_attr($link['target']) : '_self';
                                 ?>
                                     <li>
@@ -73,8 +75,10 @@
                                 <?php while (have_rows('learn_more_page', 'option')) : the_row();
                                     $link = get_sub_field('learn_more_links');
                                     if (!empty($link)) :
-                                        $link_url    = is_array($link) ? esc_url($link['url']) : esc_url($link);
-                                        $link_title  = is_array($link) ? esc_html($link['title']) : esc_html($link);
+                                        $raw_url     = is_array($link) ? ($link['url'] ?? '') : $link;
+                                        $raw_url     = trim((string)$raw_url);
+                                        $link_url    = !empty($raw_url) ? esc_url($raw_url) : 'javascript:void(0);';
+                                        $link_title  = is_array($link) ? esc_html($link['title'] ?? '') : esc_html($link);
                                         $link_target = (is_array($link) && !empty($link['target'])) ? esc_attr($link['target']) : '_self';
                                 ?>
                                     <li>
@@ -102,8 +106,10 @@
                                 <?php while (have_rows('legal_page', 'option')) : the_row();
                                     $link = get_sub_field('legal_links');
                                     if (!empty($link)) :
-                                        $link_url    = is_array($link) ? esc_url($link['url']) : esc_url($link);
-                                        $link_title  = is_array($link) ? esc_html($link['title']) : esc_html($link);
+                                        $raw_url     = is_array($link) ? ($link['url'] ?? '') : $link;
+                                        $raw_url     = trim((string)$raw_url);
+                                        $link_url    = !empty($raw_url) ? esc_url($raw_url) : 'javascript:void(0);';
+                                        $link_title  = is_array($link) ? esc_html($link['title'] ?? '') : esc_html($link);
                                         $link_target = (is_array($link) && !empty($link['target'])) ? esc_attr($link['target']) : '_self';
                                 ?>
                                     <li>
