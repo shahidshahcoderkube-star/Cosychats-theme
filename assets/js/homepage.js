@@ -59,29 +59,29 @@ function simulateCosyAI() {
         method: 'POST',
         body: formData
     })
-    .then(res => res.json())
-    .then(data => {
-        // Hide typing animation once server response returns
-        typingIndicator.style.display = 'none';
+        .then(res => res.json())
+        .then(data => {
+            // Hide typing animation once server response returns
+            typingIndicator.style.display = 'none';
 
-        if (data.success && data.data && data.data.html && data.data.html.trim() !== '') {
-            // 5. Render matching service provider cards returned by AI Search Engine
-            let searchResultsHtml = data.data.html;
-            searchResultsHtml += `
+            if (data.success && data.data && data.data.html && data.data.html.trim() !== '') {
+                // 5. Render matching service provider cards returned by AI Search Engine
+                let searchResultsHtml = data.data.html;
+                searchResultsHtml += `
                 <div class="cosy-browse-all-wrapper text-center my-4 w-100" style="display: flex; justify-content: center; width: 100%; margin-top: 36px; margin-bottom: 30px; grid-column: 1 / -1;">
                     <a href="${window.cosyAjax.siteUrl}/service-provider/" class="cosy-browse-all-parents-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, #a44390 0%, #6d2e67 100%); color: #ffffff; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-decoration: none; box-shadow: 0 4px 15px rgba(164, 67, 144, 0.3); transition: all 0.3s ease;">
                         Browse All Parents <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             `;
-            answerContent.innerHTML = searchResultsHtml;
-            try {
-                sessionStorage.setItem('cosy_ai_query', input);
-                sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
-            } catch (e) {}
-        } else {
-            // 6. Display fallback notice if AI finds zero relevant providers matching query
-            const fallbackHtml = `
+                answerContent.innerHTML = searchResultsHtml;
+                try {
+                    sessionStorage.setItem('cosy_ai_query', input);
+                    sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
+                } catch (e) { }
+            } else {
+                // 6. Display fallback notice if AI finds zero relevant providers matching query
+                const fallbackHtml = `
                 <div class="no-providers-found text-center py-5 w-100" style="background: #fdfdfd; border: 1px dashed #d1d5db; border-radius: 12px; padding: 30px;">
                     <i class="fas fa-search fa-3x mb-3" style="color: #9ca3af;"></i>
                     <h3 style="color: #4b5563; font-weight: 600; font-size: 1.25rem;">No Specific Guides Found</h3>
@@ -91,22 +91,22 @@ function simulateCosyAI() {
                     </a>
                 </div>
             `;
-            answerContent.innerHTML = fallbackHtml;
-            try {
-                sessionStorage.setItem('cosy_ai_query', input);
-                sessionStorage.setItem('cosy_ai_html', fallbackHtml);
-            } catch (e) {}
-        }
-    })
-    .catch(err => {
-        console.error('AI Search Error:', err);
-        typingIndicator.style.display = 'none';
-        answerContent.innerHTML = `
+                answerContent.innerHTML = fallbackHtml;
+                try {
+                    sessionStorage.setItem('cosy_ai_query', input);
+                    sessionStorage.setItem('cosy_ai_html', fallbackHtml);
+                } catch (e) { }
+            }
+        })
+        .catch(err => {
+            console.error('AI Search Error:', err);
+            typingIndicator.style.display = 'none';
+            answerContent.innerHTML = `
             <div style="background:#fff; border-radius:16px; padding:24px; border:1px solid #e5e7eb; text-align:center;">
                 <p style="color:#ef4444; font-weight:600;">Unable to connect to AI Search engine. Please try again later.</p>
             </div>
         `;
-    });
+        });
 }
 
 /**
@@ -125,11 +125,11 @@ function simulateCosyAI() {
  */
 document.addEventListener('DOMContentLoaded', function () {
     const inputEl = document.getElementById('ai-query-input');
-    
+
     // Detect if page was loaded via BROWSER BACK / FORWARD button vs FRESH RELOAD / REFRESH
     const navEntries = (window.performance && window.performance.getEntriesByType) ? window.performance.getEntriesByType('navigation') : [];
-    const isBackNavigation = (navEntries.length > 0 && navEntries[0].type === 'back_forward') || 
-                             (window.performance && window.performance.navigation && window.performance.navigation.type === 2);
+    const isBackNavigation = (navEntries.length > 0 && navEntries[0].type === 'back_forward') ||
+        (window.performance && window.performance.navigation && window.performance.navigation.type === 2);
 
     if (isBackNavigation) {
         // Auto-restore previous AI search state ONLY if returning via Back button
@@ -148,13 +148,13 @@ document.addEventListener('DOMContentLoaded', function () {
                     answerContent.innerHTML = savedHtml;
                 }
             }
-        } catch (e) {}
+        } catch (e) { }
     } else {
         // Clear saved search state on fresh page load or manual refresh (F5)
         try {
             sessionStorage.removeItem('cosy_ai_query');
             sessionStorage.removeItem('cosy_ai_html');
-        } catch (e) {}
+        } catch (e) { }
     }
 
     if (!inputEl) return;
