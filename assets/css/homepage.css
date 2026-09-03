@@ -52,7 +52,7 @@
    Base Structure
    ========================================================================== */
 body {
-    overflow-x: hidden;
+    overflow-x: clip !important;
 }
 
 .cosy-home-container {
