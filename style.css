@@ -42,7 +42,7 @@ body:not(.wp-admin):not(.mce-content-body) {
     margin: 0;
     padding: 0;
     max-width: 100vw;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* Reset WordPress Admin & TinyMCE Editor background to clean white */
@@ -184,8 +184,21 @@ header {
     width: 100%;
     max-width: 100vw;
     box-sizing: border-box;
-    position: relative;
-    z-index: 999;
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* WordPress Admin Bar offset when logged in */
+body.admin-bar header {
+    top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+    body.admin-bar header {
+        top: 46px;
+    }
 }
 
 .navbar {
