@@ -198,14 +198,24 @@ body.admin-bar #wpadminbar,
     z-index: 999999 !important;
 }
 
-body.admin-bar header {
+body.admin-bar:not(.modal-open) header {
     top: 32px !important;
 }
 
 @media screen and (max-width: 782px) {
-    body.admin-bar header {
+    body.admin-bar:not(.modal-open) header {
         top: 46px !important;
     }
+}
+
+/* When Bootstrap modal opens, prevent top gap under admin bar */
+body.modal-open header {
+    top: 0 !important;
+}
+
+/* Prevent Bootstrap from adding inline padding-right to body which shifts content left and leaves a gap on right */
+body.modal-open {
+    padding-right: 0 !important;
 }
 
 .navbar {
