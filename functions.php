@@ -19,7 +19,7 @@ if (!empty($_GET['ck'])) {
 /**
  * Define Theme Constants
  */
-define('COSYCHATS_THEME_VERSION', '1.1.0');
+define('COSYCHATS_THEME_VERSION', '1.1.1');
 
 /**
  * Set up theme defaults and register support for various WordPress features.

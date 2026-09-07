@@ -186,18 +186,25 @@ header {
     box-sizing: border-box !important;
     position: sticky !important;
     top: 0 !important;
-    z-index: 99999 !important;
+    z-index: 9999 !important;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05) !important;
 }
 
-/* WordPress Admin Bar offset when logged in */
+/* WordPress Admin Bar offset and z-index priority when logged in */
+body.admin-bar #wpadminbar,
+#wpadminbar,
+#wpadminbar .ab-sub-wrapper,
+#wpadminbar .quicklinks .menupop ul {
+    z-index: 999999 !important;
+}
+
 body.admin-bar header {
-    top: 32px;
+    top: 32px !important;
 }
 
 @media screen and (max-width: 782px) {
     body.admin-bar header {
-        top: 46px;
+        top: 46px !important;
     }
 }
 
