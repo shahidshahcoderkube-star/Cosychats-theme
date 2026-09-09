@@ -83,11 +83,19 @@ add_action('enqueue_block_editor_assets', 'cosy_block_editor_assets');
  */
 function cosy_enqueue_assets()
 {
+    // Load FontAwesome 6 icons globally across theme
+    wp_enqueue_style(
+        'font-awesome-6',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+        array(),
+        '6.5.1'
+    );
+
     // Load main theme CSS and global header JS across all pages
     wp_enqueue_style(
         'cosychats-theme-css',
         get_stylesheet_directory_uri() . '/style.css',
-        array(),
+        array('font-awesome-6'),
         COSYCHATS_THEME_VERSION,
         'all'
     );
@@ -152,6 +160,24 @@ function cosy_enqueue_assets()
             'cosy-faqs-js',
             get_stylesheet_directory_uri() . '/assets/js/faqs.js',
             array('jquery'),
+            COSYCHATS_THEME_VERSION,
+            true
+        );
+    }
+
+    // Load dedicated assets for SEO Landing Page Template ("SEO Nets")
+    if (is_page_template('seo-landing-page.php')) {
+        wp_enqueue_style(
+            'cosychats-seo-landing-css',
+            get_stylesheet_directory_uri() . '/assets/css/seo-landing.css',
+            array('cosychats-theme-css'),
+            COSYCHATS_THEME_VERSION,
+            'all'
+        );
+        wp_enqueue_script(
+            'cosy-seo-landing-js',
+            get_stylesheet_directory_uri() . '/assets/js/seo-landing.js',
+            array(),
             COSYCHATS_THEME_VERSION,
             true
         );
