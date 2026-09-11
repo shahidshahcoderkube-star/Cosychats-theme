@@ -1945,6 +1945,73 @@ body {
     box-sizing: border-box;
 }
 
+/* AI Search Fallback / No Match Notice Banner - CosyChats Brand Match (2-Line Compact Layout) */
+.cosy-no-match-notice {
+    text-align: center;
+    margin: 0 auto 30px auto;
+    padding: 20px 28px;
+    background: linear-gradient(135deg, #ffffff 0%, #fdf5fc 100%);
+    border: 1.5px solid #ebd5e9;
+    border-radius: 16px;
+    box-shadow: 0 6px 22px rgba(109, 46, 103, 0.05);
+    max-width: 860px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cosy-no-match-title {
+    color: #6d2e67;
+    font-size: 1.28rem;
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0 0 6px 0;
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.cosy-no-match-inline-icon {
+    color: #a44390;
+    font-size: 1.12rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.cosy-no-match-subtitle {
+    color: #6b5569;
+    font-size: 0.98rem;
+    font-weight: 500;
+    line-height: 1.45;
+    margin: 0;
+    font-family: var(--cosy-font-body, 'Plus Jakarta Sans', sans-serif);
+}
+
+@media (max-width: 640px) {
+    .cosy-no-match-notice {
+        padding: 16px 14px;
+        margin-bottom: 20px;
+        border-radius: 12px;
+    }
+    .cosy-no-match-title {
+        font-size: 1.12rem;
+        gap: 8px;
+    }
+    .cosy-no-match-inline-icon {
+        font-size: 1rem;
+    }
+    .cosy-no-match-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
 /* AI Typing Indicator & Dots */
 .cosy-google-style-home .ai-typing-indicator {
     display: flex;
