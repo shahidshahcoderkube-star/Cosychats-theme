@@ -1,7 +1,7 @@
 /**
  * Cosychats - SEO Landing Page Template Stylesheet
  * 
- * Standalone styles for high-converting, SEO-optimized landing pages ("SEO Nets").
+ * Clean, editorial SEO article layout with subtle CosyChats connect inserts.
  * Loaded conditionally only when the "SEO Landing Page" template is active.
  *
  * @package Cosychats
@@ -15,41 +15,32 @@
     --seo-accent: #a44390;
     --seo-accent-hover: #8c327b;
     --seo-accent-light: #fdf5fc;
-    --seo-accent-border: #f8dbf3;
+    --seo-accent-border: #ebd5e9;
     --seo-dark: #1e293b;
+    --seo-text: #334155;
     --seo-muted: #64748b;
-    --seo-card-bg: #ffffff;
-    --seo-radius-lg: 20px;
+    --seo-radius-lg: 18px;
     --seo-radius-md: 14px;
     --seo-radius-sm: 8px;
-    --seo-shadow-subtle: 0 4px 20px rgba(109, 46, 103, 0.06);
-    --seo-shadow-hover: 0 10px 30px rgba(109, 46, 103, 0.12);
-    
-    font-family: var(--cosy-font-body, 'Poppins', sans-serif);
-    color: var(--seo-dark);
-    line-height: 1.7;
+
+    font-family: var(--cosy-font-body, 'Plus Jakarta Sans', sans-serif);
+    color: var(--seo-text);
+    line-height: 1.75;
     background: #ffffff;
     width: 100%;
 }
 
 /* ==========================================================================
-   2. Hero Section
+   2. Page Container
    ========================================================================== */
-.cosy-seo-hero {
-    position: relative !important;
-    top: auto !important;
-    z-index: 1 !important;
-    background: linear-gradient(180deg, #fdf5fc 0%, #ffffff 100%);
-    padding: 55px 20px 45px;
-    border-bottom: 1px solid #f7eef6;
-}
-
-.cosy-seo-hero-container {
+.cosy-seo-page-container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 35px 20px 70px;
+    box-sizing: border-box;
 }
 
-/* Breadcrumbs */
+/* Breadcrumbs Navigation */
 .cosy-seo-breadcrumbs {
     display: flex;
     align-items: center;
@@ -57,7 +48,7 @@
     gap: 8px;
     font-size: 0.88rem;
     color: var(--seo-muted);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 .cosy-seo-breadcrumbs a {
@@ -80,18 +71,14 @@
     font-weight: 600;
 }
 
-/* Hero Content Grid */
-.cosy-seo-hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 40px;
-    align-items: center;
+/* Category Pill Badge (Clean, No Heart) */
+.cosy-seo-badge-wrap {
+    margin-bottom: 14px;
 }
 
 .cosy-seo-hero-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
     background: #f8dbf3;
     color: var(--seo-primary);
     font-weight: 700;
@@ -100,257 +87,182 @@
     letter-spacing: 0.05em;
     padding: 6px 14px;
     border-radius: 50px;
-    margin-bottom: 18px;
 }
 
-.cosy-seo-hero-title {
+/* Article Main Heading */
+.cosy-seo-article-title {
     font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.85rem, 3.8vw, 2.75rem);
+    font-size: clamp(1.85rem, 3.6vw, 2.65rem);
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.25;
     color: var(--seo-primary);
-    margin-bottom: 18px;
+    margin: 0 0 28px 0;
     letter-spacing: -0.02em;
 }
 
-.cosy-seo-hero-subtitle {
-    font-size: clamp(1.02rem, 1.8vw, 1.18rem);
-    color: var(--seo-muted);
-    line-height: 1.65;
-    margin-bottom: 28px;
-    max-width: 620px;
-}
-
-/* CTA Buttons */
-.cosy-seo-hero-actions {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
-.cosy-seo-btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    background: linear-gradient(135deg, var(--seo-accent) 0%, var(--seo-primary) 100%);
-    color: #ffffff !important;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 14px 28px;
-    border-radius: 50px;
-    text-decoration: none !important;
-    box-shadow: 0 8px 24px rgba(164, 67, 144, 0.3);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: none;
-    cursor: pointer;
-    white-space: nowrap !important;
-}
-
-.cosy-seo-btn-primary svg {
-    flex-shrink: 0;
-    transition: transform 0.2s ease;
-}
-
-.cosy-seo-btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 28px rgba(164, 67, 144, 0.4);
-    color: #ffffff !important;
-}
-
-.cosy-seo-btn-primary:hover svg {
-    transform: translateX(4px);
-}
-
-.cosy-seo-btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: #ffffff;
-    color: var(--seo-primary) !important;
-    font-weight: 600;
-    font-size: 0.98rem;
-    padding: 13px 24px;
-    border-radius: 50px;
-    text-decoration: none !important;
-    border: 1.5px solid var(--seo-accent-border);
-    transition: all 0.2s ease;
-    white-space: nowrap !important;
-}
-
-.cosy-seo-btn-secondary svg {
-    flex-shrink: 0;
-}
-
-.cosy-seo-btn-secondary:hover {
-    background: var(--seo-accent-light);
-    border-color: var(--seo-accent);
-}
-
-/* Hero Media (Image or Illustration) */
-.cosy-seo-hero-media {
+/* ==========================================================================
+   3. Editorial Content & Media Float Wrap
+   ========================================================================== */
+.cosy-seo-article-body {
     position: relative;
+}
+
+/* Featured Media Float Box (Top Right on Desktop) */
+.cosy-seo-featured-media-box {
+    float: right;
+    width: 380px;
+    max-width: 48%;
+    margin: 4px 0 24px 32px;
+    box-sizing: border-box;
+}
+
+.cosy-seo-img-holder {
     border-radius: var(--seo-radius-lg);
     overflow: hidden;
     background: #ffffff;
-    box-shadow: var(--seo-shadow-subtle);
+    box-shadow: 0 8px 25px rgba(109, 46, 103, 0.08);
     border: 1.5px solid #f3e8f4;
-    aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
-.cosy-seo-hero-media img {
+.cosy-seo-main-photo {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-/* ==========================================================================
-   3. Trust Strip / Feature Badges
-   ========================================================================== */
-.cosy-seo-trust-strip-wrapper {
-    max-width: 1100px;
-    margin: 35px auto 40px;
-    padding: 0 20px;
-    position: relative;
-    z-index: 2;
-}
-
-.cosy-seo-trust-strip {
-    background: #ffffff;
-    border-radius: var(--seo-radius-md);
-    box-shadow: 0 10px 30px rgba(109, 46, 103, 0.08);
-    border: 1px solid #f1ddf0;
-    padding: 22px 30px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.cosy-seo-trust-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-}
-
-.cosy-seo-trust-icon {
-    width: 46px;
-    height: 46px;
-    min-width: 46px;
-    border-radius: 12px;
-    background: var(--seo-accent-light);
-    color: var(--seo-accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-}
-
-.cosy-seo-trust-info strong {
-    display: block;
-    font-size: 0.95rem;
-    color: var(--seo-dark);
-    font-weight: 700;
-}
-
-.cosy-seo-trust-info span {
-    font-size: 0.82rem;
-    color: var(--seo-muted);
-}
-
-/* ==========================================================================
-   4. Main Content Article & Typography
-   ========================================================================== */
-.cosy-seo-main-container {
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 20px 20px 60px;
-}
-
-.cosy-seo-content-article {
-    font-size: 1.05rem;
-    line-height: 1.8;
-    color: #334155;
-}
-
-.cosy-seo-content-article p {
-    margin-bottom: 22px;
-    font-size: 1.05rem;
-    line-height: 1.8;
-}
-
-.cosy-seo-content-article h2 {
-    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
-    font-weight: 700;
-    color: var(--seo-primary);
-    margin-top: 42px;
-    margin-bottom: 18px;
-    position: relative;
-    padding-left: 16px;
-}
-
-.cosy-seo-content-article h2::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 6px;
-    bottom: 6px;
-    width: 4px;
-    background: var(--seo-accent);
-    border-radius: 4px;
-}
-
-.cosy-seo-content-article h3 {
-    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.18rem, 2.2vw, 1.45rem);
-    font-weight: 600;
-    color: var(--seo-primary);
-    margin-top: 32px;
-    margin-bottom: 14px;
-}
-
-.cosy-seo-content-article ul,
-.cosy-seo-content-article ol {
-    margin: 0 0 26px 0;
-    padding-left: 24px;
-}
-
-.cosy-seo-content-article li {
-    margin-bottom: 10px;
-    line-height: 1.7;
-}
-
-.cosy-seo-content-article blockquote {
-    border-left: 4px solid var(--seo-accent);
-    background: var(--seo-accent-light);
-    margin: 28px 0;
-    padding: 20px 24px;
-    border-radius: 0 var(--seo-radius-md) var(--seo-radius-md) 0;
-    font-style: italic;
-    color: var(--seo-primary);
-    font-size: 1.08rem;
-}
-
-.cosy-seo-content-article img {
-    max-width: 100%;
     height: auto;
-    border-radius: var(--seo-radius-md);
-    margin: 24px 0;
+    display: block;
+    object-fit: cover;
 }
 
-/* Key Takeaways Callout Box */
-.cosy-seo-takeaways-card {
-    background: linear-gradient(135deg, #fdf5fc 0%, #faeef9 100%);
+/* Parent Name Caption Underneath Image */
+.cosy-seo-parent-caption {
+    text-align: center;
+    margin-top: 10px;
+    padding: 0 4px;
+}
+
+.cosy-seo-caption-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #7c5279;
+    font-family: var(--cosy-font-body, 'Plus Jakarta Sans', sans-serif);
+}
+
+/* Content Flow Typography */
+.cosy-seo-content-flow {
+    font-size: 1.05rem;
+    line-height: 1.82;
+    color: var(--seo-text);
+}
+
+.cosy-seo-content-flow p {
+    margin: 0 0 22px 0;
+}
+
+.cosy-seo-lead-paragraph {
+    font-size: 1.12rem;
+    line-height: 1.78;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   4. Mid-Article Callout Box (Wrap-around insert)
+   ========================================================================== */
+.cosy-seo-mid-insert {
+    float: right;
+    width: 310px;
+    max-width: 45%;
+    margin: 18px 0 22px 28px;
+    background: linear-gradient(135deg, #ffffff 0%, #fdf5fc 100%);
     border: 1.5px solid var(--seo-accent-border);
-    border-radius: var(--seo-radius-md);
-    padding: 26px 28px;
-    margin: 35px 0;
-    box-shadow: var(--seo-shadow-subtle);
+    border-radius: 16px;
+    padding: 22px 24px;
+    box-shadow: 0 6px 20px rgba(109, 46, 103, 0.04);
+    box-sizing: border-box;
+}
+
+.cosy-seo-insert-heading {
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--seo-primary);
+    margin: 0 0 6px 0;
+    line-height: 1.3;
+}
+
+.cosy-seo-insert-desc {
+    font-size: 0.95rem;
+    color: #475569;
+    margin: 0 0 16px 0;
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.cosy-seo-insert-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cosy-seo-insert-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--seo-accent);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.cosy-seo-insert-link .cosy-arrow {
+    transition: transform 0.2s ease;
+}
+
+.cosy-seo-insert-link:hover {
+    color: var(--seo-primary);
+}
+
+.cosy-seo-insert-link:hover .cosy-arrow {
+    transform: translateX(4px);
+}
+
+/* Support for additional inline images inside the article */
+.cosy-seo-content-flow img.alignright {
+    float: right;
+    margin: 12px 0 20px 24px;
+    max-width: 340px;
+    border-radius: 12px;
+}
+
+.cosy-seo-content-flow img.alignleft {
+    float: left;
+    margin: 12px 24px 20px 0;
+    max-width: 340px;
+    border-radius: 12px;
+}
+
+.cosy-seo-content-flow img.aligncenter {
+    display: block;
+    margin: 24px auto;
+    max-width: 100%;
+    border-radius: 12px;
+}
+
+.cosy-seo-clear {
+    clear: both;
+}
+
+/* ==========================================================================
+   5. Key Takeaways & What to Expect Card (Highlight Box)
+   ========================================================================== */
+.cosy-seo-takeaways-card {
+    background: #fdf4fb;
+    border: 1.5px solid #ebd5ea;
+    border-radius: 18px;
+    padding: 24px 28px;
+    margin: 32px 0;
+    box-sizing: border-box;
+    box-shadow: 0 4px 20px rgba(109, 46, 103, 0.03);
+    clear: both;
 }
 
 .cosy-seo-takeaways-header {
@@ -358,404 +270,234 @@
     align-items: center;
     gap: 12px;
     margin-bottom: 16px;
-    color: var(--seo-primary);
 }
 
-.cosy-seo-takeaways-header i {
-    font-size: 1.3rem;
-    color: var(--seo-accent);
-}
-
-.cosy-seo-takeaways-header h4 {
+.cosy-seo-takeaways-header p {
     margin: 0;
-    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--seo-primary);
-}
-
-.cosy-seo-takeaways-list {
-    list-style: none !important;
-    padding-left: 0 !important;
-    margin-bottom: 0 !important;
-}
-
-.cosy-seo-takeaways-list li {
-    position: relative;
-    padding-left: 28px;
-    margin-bottom: 12px;
-    font-size: 0.98rem;
-    color: #334155;
-}
-
-.cosy-seo-takeaways-list li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--seo-accent);
-    font-weight: bold;
-    font-size: 1.05rem;
-}
-
-/* ==========================================================================
-   5. Alternating Feature Section (Zigzag: Image | Content & Content | Image)
-   ========================================================================== */
-.cosy-seo-zigzag-section {
-    padding: 20px 20px 60px;
-    background: transparent;
-    border: none;
-}
-
-.cosy-seo-zigzag-container {
-    max-width: 1120px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 65px;
-}
-
-.cosy-seo-zigzag-row {
-    display: grid;
-    grid-template-columns: 1fr 1.15fr;
-    gap: 50px;
-    align-items: center;
-}
-
-.cosy-seo-row-reverse {
-    grid-template-columns: 1.15fr 1fr;
-}
-
-.cosy-seo-zigzag-media {
-    border-radius: var(--seo-radius-lg);
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(109, 46, 103, 0.08);
-    border: 1.5px solid #f3e8f4;
-    aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fdf5fc;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.cosy-seo-zigzag-media:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 36px rgba(109, 46, 103, 0.14);
-}
-
-.cosy-seo-zigzag-media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.cosy-seo-zigzag-badge {
+    padding: 0;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: #f8dbf3;
-    color: var(--seo-primary);
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 5px 14px;
-    border-radius: 50px;
-    margin-bottom: 14px;
 }
 
-.cosy-seo-zigzag-badge svg {
-    color: var(--seo-accent);
-}
-
-.cosy-seo-zigzag-content h3 {
-    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.35rem, 2.3vw, 1.8rem);
-    font-weight: 700;
-    color: var(--seo-primary);
-    line-height: 1.3;
-    margin-bottom: 12px;
-}
-
-.cosy-seo-zigzag-content p {
-    font-size: 1.02rem;
-    color: #475569;
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.cosy-seo-zigzag-checklist {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.cosy-seo-zigzag-checklist li {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 0.96rem;
-    color: var(--seo-dark);
-    line-height: 1.5;
-}
-
-.cosy-seo-zigzag-checklist li svg {
-    flex-shrink: 0;
-    margin-top: 2px;
-    color: var(--seo-accent);
-    background: #fbf0fa;
-    padding: 3px;
-    border-radius: 50%;
-    border: 1px solid #f3d4ef;
-    width: 20px;
-    height: 20px;
-}
-
-.cosy-seo-bottom-wrapper {
-    padding-top: 50px;
-}
-
-/* ==========================================================================
-   6. Interactive FAQ Accordion
-   ========================================================================== */
-.cosy-seo-faq-section {
-    margin-top: 10px;
-    padding-top: 0;
-    border-top: none;
-}
-
-.cosy-seo-faq-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.cosy-seo-faq-header h2 {
-    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.5rem, 3vw, 2.1rem);
-    font-weight: 700;
-    color: var(--seo-primary);
-    margin-bottom: 10px;
-    padding-left: 0;
-}
-
-.cosy-seo-faq-header h2::before {
+.cosy-seo-takeaways-header p:empty {
     display: none;
 }
 
-.cosy-seo-faq-header p {
-    color: var(--seo-muted);
-    font-size: 0.98rem;
-}
-
-.cosy-seo-faq-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.cosy-seo-faq-item {
-    background: #ffffff;
-    border: 1.5px solid #f1e2f0;
-    border-radius: var(--seo-radius-md);
-    overflow: hidden;
-    transition: all 0.25s ease;
-}
-
-.cosy-seo-faq-item.active {
-    border-color: var(--seo-accent);
-    box-shadow: 0 4px 18px rgba(164, 67, 144, 0.08);
-}
-
-.cosy-seo-faq-question {
-    padding: 18px 22px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.02rem;
-    color: var(--seo-dark);
-    user-select: none;
-    transition: color 0.2s ease;
-}
-
-.cosy-seo-faq-question:hover {
-    color: var(--seo-accent);
-}
-
-.cosy-seo-faq-toggle-icon {
-    width: 28px;
-    height: 28px;
-    min-width: 28px;
-    border-radius: 50%;
-    background: var(--seo-accent-light);
-    display: flex;
+.cosy-seo-takeaways-header i,
+.cosy-seo-takeaways-header svg,
+.cosy-seo-takeaways-icon {
+    font-size: 1.35rem;
+    color: #6d2e67;
+    line-height: 1;
+    flex-shrink: 0;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--seo-accent);
-    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.cosy-seo-faq-item.active .cosy-seo-faq-toggle-icon {
-    transform: rotate(180deg);
-    background: var(--seo-accent);
-    color: #ffffff;
+.cosy-seo-takeaways-header h4,
+.cosy-seo-takeaways-header h3 {
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #4a1d47;
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+    display: inline-block;
 }
 
-.cosy-seo-faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s ease;
-    padding: 0 22px;
-    color: #475569;
-    font-size: 0.96rem;
-    line-height: 1.7;
+.cosy-seo-takeaways-list,
+.cosy-seo-takeaways-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.cosy-seo-faq-item.active .cosy-seo-faq-answer {
-    max-height: 500px;
-    padding: 0 22px 20px;
+.cosy-seo-takeaways-list li,
+.cosy-seo-takeaways-card ul li {
+    position: relative;
+    list-style: none;
+    padding-left: 28px;
+    margin: 0 0 12px 0;
+    font-size: 1.02rem;
+    color: #334155;
+    line-height: 1.55;
+    font-weight: 500;
+}
+
+.cosy-seo-takeaways-list li:last-child,
+.cosy-seo-takeaways-card ul li:last-child {
+    margin-bottom: 0;
+}
+
+.cosy-seo-takeaways-list li::before,
+.cosy-seo-takeaways-card ul li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: -1px;
+    color: #a44390;
+    font-weight: 700;
+    font-size: 1.18rem;
+    line-height: 1.5;
 }
 
 /* ==========================================================================
-   6. Bottom Conversion Banner
+   6. End-of-Article Bottom CTA Box
    ========================================================================== */
-.cosy-seo-bottom-banner {
-    margin-top: 60px;
-    background: linear-gradient(135deg, #fdf5fc 0%, #f6ddf4 100%);
+.cosy-seo-bottom-article-cta {
+    background: linear-gradient(135deg, #ffffff 0%, #fdf5fc 100%);
     border: 1.5px solid var(--seo-accent-border);
-    border-radius: var(--seo-radius-lg);
-    padding: 38px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 36px;
-    box-shadow: 0 12px 36px rgba(109, 46, 103, 0.08);
+    border-radius: 18px;
+    padding: 34px 38px;
+    margin: 45px 0 20px 0;
+    box-shadow: 0 8px 28px rgba(109, 46, 103, 0.05);
+    text-align: center;
+    box-sizing: border-box;
 }
 
-.cosy-seo-bottom-text {
-    flex: 1;
-    min-width: 0;
-}
-
-.cosy-seo-bottom-text h3 {
+.cosy-seo-bottom-title {
     font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    font-size: clamp(1.3rem, 2.6vw, 1.6rem);
     font-weight: 700;
     color: var(--seo-primary);
-    margin-bottom: 10px;
-    line-height: 1.3;
+    margin: 0 0 10px 0;
+    line-height: 1.35;
 }
 
-.cosy-seo-bottom-text p {
-    font-size: 0.98rem;
+.cosy-seo-bottom-desc {
+    font-size: 1.02rem;
     color: #475569;
-    margin-bottom: 0;
+    margin: 0 0 12px 0;
     line-height: 1.6;
 }
 
-.cosy-seo-bottom-actions {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+.cosy-seo-bottom-highlight {
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: var(--seo-primary);
+    margin: 0 0 24px 0;
 }
 
-.cosy-seo-bottom-actions .cosy-seo-btn-primary {
-    padding: 14px 30px;
-    font-size: 1.02rem;
-    white-space: nowrap !important;
+.cosy-seo-bottom-links {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.cosy-seo-btn-bottom {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--seo-accent) 0%, var(--seo-primary) 100%);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.98rem;
+    padding: 13px 26px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(164, 67, 144, 0.28);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.cosy-seo-btn-bottom span,
+.cosy-seo-btn-bottom .cosy-arrow {
+    color: inherit;
+}
+
+.cosy-seo-btn-bottom .cosy-arrow {
+    transition: transform 0.2s ease;
+}
+
+.cosy-seo-btn-bottom:hover,
+.cosy-seo-btn-bottom:focus {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--seo-accent-hover) 0%, #562153 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(164, 67, 144, 0.38);
+    text-decoration: none;
+}
+
+.cosy-seo-btn-bottom:hover span,
+.cosy-seo-btn-bottom:hover .cosy-arrow,
+.cosy-seo-btn-bottom:focus span,
+.cosy-seo-btn-bottom:focus .cosy-arrow {
+    color: #ffffff;
+}
+
+.cosy-seo-btn-bottom:hover .cosy-arrow {
+    transform: translateX(4px);
+}
+
+.cosy-seo-btn-outline {
+    background: #ffffff;
+    color: var(--seo-primary);
+    border: 1.5px solid var(--seo-accent-border);
+    box-shadow: none;
+}
+
+.cosy-seo-btn-outline:hover,
+.cosy-seo-btn-outline:focus {
+    background: var(--seo-accent-light);
+    border-color: var(--seo-accent);
+    color: var(--seo-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(109, 46, 103, 0.08);
+    text-decoration: none;
+}
+
+.cosy-seo-btn-outline:hover span,
+.cosy-seo-btn-outline:hover .cosy-arrow,
+.cosy-seo-btn-outline:focus span,
+.cosy-seo-btn-outline:focus .cosy-arrow {
+    color: var(--seo-accent-hover);
 }
 
 /* ==========================================================================
-   7. Responsive Adaptations
+   6. Responsive Layout Breakpoints
    ========================================================================== */
-@media screen and (max-width: 991px) {
-    .cosy-seo-hero-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
+@media (max-width: 768px) {
+    .cosy-seo-page-container {
+        padding: 24px 16px 50px;
     }
 
-    .cosy-seo-hero-media {
-        max-width: 500px;
-        margin: 0 auto;
+    .cosy-seo-featured-media-box {
+        float: none;
         width: 100%;
+        max-width: 100%;
+        margin: 0 0 24px 0;
     }
 
-    .cosy-seo-trust-strip {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 20px;
-    }
-
-    .cosy-seo-zigzag-container {
-        gap: 45px;
-    }
-
-    .cosy-seo-zigzag-row,
-    .cosy-seo-row-reverse {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-
-    .cosy-seo-zigzag-media {
-        max-width: 520px;
-        margin: 0 auto;
+    .cosy-seo-mid-insert {
+        float: none;
         width: 100%;
+        max-width: 100%;
+        margin: 24px 0;
     }
 
-    .cosy-seo-row-reverse .cosy-seo-zigzag-media {
-        order: -1;
+    .cosy-seo-content-flow img.alignright,
+    .cosy-seo-content-flow img.alignleft {
+        float: none;
+        max-width: 100%;
+        margin: 16px 0;
     }
 
-    .cosy-seo-bottom-banner {
+    .cosy-seo-bottom-article-cta {
+        padding: 24px 20px;
+        margin-top: 35px;
+    }
+
+    .cosy-seo-bottom-links {
         flex-direction: column;
-        text-align: center;
-        padding: 32px 24px;
-        gap: 22px;
+        width: 100%;
     }
 
-    .cosy-seo-bottom-actions {
+    .cosy-seo-btn-bottom {
+        width: 100%;
         justify-content: center;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .cosy-seo-hero {
-        padding: 35px 16px 30px;
-    }
-
-    .cosy-seo-hero-actions {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .cosy-seo-btn-primary,
-    .cosy-seo-btn-secondary {
-        width: 100%;
-        text-align: center;
-    }
-
-    .cosy-seo-trust-strip-wrapper {
-        margin: 25px auto 30px;
-        padding: 0 16px;
-    }
-
-    .cosy-seo-zigzag-section {
-        padding: 40px 16px 30px;
-    }
-
-    .cosy-seo-zigzag-container {
-        gap: 40px;
-    }
-
-    .cosy-seo-main-container {
-        padding: 15px 16px 40px;
+        box-sizing: border-box;
     }
 }

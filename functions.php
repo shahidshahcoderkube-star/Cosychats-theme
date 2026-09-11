@@ -167,11 +167,15 @@ function cosy_enqueue_assets()
 
     // Load dedicated assets for SEO Landing Page Template ("SEO Nets")
     if (is_page_template('seo-landing-page.php')) {
+        $seo_css_ver = file_exists(get_stylesheet_directory() . '/assets/css/seo-landing.css') 
+            ? filemtime(get_stylesheet_directory() . '/assets/css/seo-landing.css') 
+            : COSYCHATS_THEME_VERSION;
+
         wp_enqueue_style(
             'cosychats-seo-landing-css',
             get_stylesheet_directory_uri() . '/assets/css/seo-landing.css',
-            array('cosychats-theme-css'),
-            COSYCHATS_THEME_VERSION,
+            array('cosychats-theme-css', 'font-awesome-6'),
+            $seo_css_ver,
             'all'
         );
         wp_enqueue_script(
