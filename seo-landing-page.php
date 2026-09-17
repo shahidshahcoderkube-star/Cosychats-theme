@@ -17,39 +17,50 @@ $choose_experience = $page_data['choose_experience'];
 $daily_strategies_heading = $page_data['daily_strategies_heading'];
 $strategy_sub_heading = $page_data['strategy_sub_heading'];
 $daily_strategies_list = $page_data['daily_strategies_list'];
-$takeaways_heading = $page_data['takeaways_heading'];
-$key_takeaways_list = $page_data['key_takeaways_list'];
+$expect_heading = $page_data['expect_heading'];
+$expect_list = $page_data['expect_list'];
 $lived_experience_heading = $page_data['lived_experience_heading'];
 $lived_experience_description = $page_data['lived_experience_description'];
+$support_title = $page_data['support_title'];
+$support_description = $page_data['support_short_description'];
 $cta_title = $page_data['cta_title'];
 $cta_sub_title = $page_data['cta_sub_title'];
 $cta_highlight = $page_data['cta_highlight'];
 $cta_button = $page_data['cta_button'];
+$experience_user = $page_data['experience_user'];
 $page_title = get_the_title();
 $published_date = get_the_date('c');
 $modified_date  = get_the_modified_date('c');
+$page_url       = get_permalink();
 ?>
 
 <main id="primary" class="site-main cosy-seo-landing-root">
 
     <div class="cosy-seo-page-container">
 
+        <?php
+        $category_name = !empty($choose_experience->post_title) ? $choose_experience->post_title : __('Parenting Experiences', 'cosychats');
+        $category_slug = !empty($choose_experience->post_name) ? $choose_experience->post_name : '';
+        $category_url  = !empty($category_slug) ? home_url('/service-provider/' . $category_slug . '/') : home_url('/service-provider/');
+        ?>
         <!-- 1. Breadcrumbs Navigation: Home > Parenting Experiences > Title -->
         <nav class="cosy-seo-breadcrumbs" aria-label="<?php esc_attr_e('Breadcrumbs', 'cosychats'); ?>">
-            <a href="<?php echo esc_url(home_url('/')); ?>"><?php echo ('Home'); ?></a>
+            <a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'cosychats'); ?></a>
             <span class="separator">›</span>
-            <a href="<?php echo esc_url(home_url('/service-provider/')); ?>"><?php echo $choose_experience->post_title; ?></a>
+            <a href="<?php echo esc_url($category_url); ?>"><?php echo esc_html($category_name); ?></a>
             <span class="separator">›</span>
-            <span class="current" aria-current="page"><?php echo $page_title; ?></span>
+            <span class="current" aria-current="page"><?php echo esc_html($page_title); ?></span>
         </nav>
 
         <!-- 2. Category Pill Badge -->
         <div class="cosy-seo-badge-wrap">
-            <span class="cosy-seo-hero-badge"><?php echo $choose_experience->post_title; ?></span>
+            <a href="<?php echo esc_url($category_url); ?>" class="cosy-seo-hero-badge">
+                <?php echo esc_html($category_name); ?>
+            </a>
         </div>
 
         <!-- 3. Article Main Heading -->
-        <h1 class="cosy-seo-article-title"><?php echo $page_title; ?></h1>
+        <h1 class="cosy-seo-article-title"><?php echo esc_html($page_title); ?></h1>
 
         <!-- 4. Editorial Article Area with Text Wrap Around Featured Image & Insert -->
         <article class="cosy-seo-article-body">
@@ -57,12 +68,21 @@ $modified_date  = get_the_modified_date('c');
             <!-- Featured Image with Parent Name underneath -->
             <div class="cosy-seo-featured-media-box">
                 <div class="cosy-seo-img-holder">
-                    <?php if (!empty(has_post_thumbnail())) : ?>
-                        <?php the_post_thumbnail('large', ['alt' => esc_attr($page_title), 'class' => 'cosy-seo-main-photo']); ?>
+                    <?php if (has_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail('large', [
+                            'alt'           => esc_attr($page_title),
+                            'class'         => 'cosy-seo-main-photo',
+                            'loading'       => 'eager',
+                            'fetchpriority' => 'high',
+                            'decoding'      => 'async',
+                        ]); ?>
                     <?php endif; ?>
                 </div>
                 <div class="cosy-seo-parent-caption">
-                    <span class="cosy-seo-caption-text">Sarah - CosyChats Parent</span>
+                    <?php
+                    $parent_display = !empty($experience_user['user_firstname']) ? $experience_user['user_firstname'] : __('CosyChats', 'cosychats');
+                    ?>
+                    <span class="cosy-seo-caption-text"><?php echo esc_html($parent_display . ' - CosyChats Parent'); ?></span>
                 </div>
             </div>
 
@@ -71,43 +91,50 @@ $modified_date  = get_the_modified_date('c');
                 <?php the_content(); ?>
                 <!-- Daily Strategies That Make a Real Difference -->
                 <?php if (!empty($daily_strategies_heading)) : ?>
-                    <h2><?php echo $daily_strategies_heading ?></h2>
+                    <h2><?php echo esc_html($daily_strategies_heading); ?></h2>
                 <?php endif; ?>
-                <p><?php echo $strategy_sub_heading ?></p>
+                <p><?php echo esc_html($strategy_sub_heading); ?></p>
                 <ul class="cosy-seo-strategies-list">
                     <?php if (!empty($daily_strategies_list)) : ?>
                         <?php foreach ($daily_strategies_list as $strategy) : ?>
-                            <li><strong><?php echo $strategy['strategies_title'] ?>:</strong> <?php echo $strategy['strategies_description'] ?></li>
+                            <li><strong><?php echo esc_html($strategy['strategies_title'] ?? ''); ?>:</strong> <?php echo esc_html($strategy['strategies_description'] ?? ''); ?></li>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </ul>
-                <!-- Key Takeaways & What to Expect Card -->
-                <?php if (!empty($key_takeaways_list)) : ?>
+                <!-- Key Takeaways & What to Expect Card (Proper H3 Hierarchy) -->
+                <?php if (!empty($expect_list)) : ?>
                     <div class="cosy-seo-takeaways-card">
                         <div class="cosy-seo-takeaways-header">
                             <i class="fa-regular fa-lightbulb"></i>
-                            <h4><?php echo $takeaways_heading ?></h4>
+                            <h3><?php echo esc_html($expect_heading); ?></h3>
                         </div>
                         <ul class="cosy-seo-takeaways-list">
-                            <?php if (!empty($key_takeaways_list)) : ?>
-                                <?php foreach ($key_takeaways_list as $takeaway) : ?>
-                                    <li><?php echo $takeaway['add_takeaway_point'] ?></li>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
+                            <?php foreach ($expect_list as $expect) : ?>
+                                <?php if (!empty($expect['add_expect_point'])) : ?>
+                                    <li><?php echo esc_html($expect['add_expect_point']); ?></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 <?php endif; ?>
 
+                <!-- Why Speaking with a Lived-Experience Parent Matters -->
+                <?php if (!empty($lived_experience_heading)) : ?>
+                    <h2><?php echo esc_html($lived_experience_heading); ?></h2>
+                <?php endif; ?>
+                <?php if (!empty($lived_experience_description)) : ?>
+                    <?php echo wp_kses_post(wpautop($lived_experience_description)); ?>
+                <?php endif; ?>
 
-                <div class="cosy-seo-content-flow">
-                    <!-- Why Speaking with a Lived-Experience Parent Matters -->
-                    <?php if (!empty($lived_experience_heading)) : ?>
-                        <h2><?php echo $lived_experience_heading ?></h2>
-                    <?php endif; ?>
-                    <?php if (!empty($lived_experience_description)) : ?>
-                        <?php echo $lived_experience_description ?>
-                    <?php endif; ?>
-
+                <!-- Peer Support & Healthcare Notice (Google Quality Rater E-E-A-T Requirement) -->
+                <div class="cosy-seo-trust-disclaimer">
+                    <div class="cosy-seo-disclaimer-icon">
+                        <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                    </div>
+                    <div class="cosy-seo-disclaimer-text">
+                        <strong><?php esc_html_e($support_title, 'cosychats'); ?></strong>
+                        <span><?php esc_html_e($support_description, 'cosychats'); ?></span>
+                    </div>
                 </div>
             </div>
 
@@ -138,30 +165,32 @@ $modified_date  = get_the_modified_date('c');
                     <?php endif; ?>
                 </div>
             </div>
-
+            <?php
+            $other_services = get_posts([
+                'post_type'      => 'cosy_service',
+                'posts_per_page' => -1,
+                'post_status'    => 'publish',
+                'orderby'        => 'menu_order title',
+                'order'          => 'ASC',
+            ]);
+            if (!empty($other_services)) : ?>
+                <section class="cosy-seo-related-section" aria-label="<?php esc_attr_e('Explore Parenting Support Areas', 'cosychats'); ?>">
+                    <h3 class="cosy-seo-related-title"><?php esc_html_e('Explore More Parenting Support Areas', 'cosychats'); ?></h3>
+                    <div class="cosy-seo-category-chips">
+                        <?php foreach ($other_services as $srv) : ?>
+                            <a href="<?php echo esc_url(home_url('/service-provider/' . $srv->post_name . '/')); ?>" class="cosy-seo-chip">
+                                <i class="fa-solid fa-users" aria-hidden="true"></i>
+                                <span><?php echo esc_html($srv->post_title); ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </section>
+            <?php endif; ?>
         </article>
 
     </div>
 
 </main>
-
-<!-- Schema.org JSON-LD Structured Data for Google SEO Article -->
-<script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": <?php echo wp_json_encode($page_title); ?>,
-        "description": <?php echo wp_json_encode(!empty($strategy_sub_heading) ? $strategy_sub_heading : $page_title); ?>,
-        "url": <?php echo wp_json_encode($page_url); ?>,
-        "datePublished": <?php echo wp_json_encode($published_date); ?>,
-        "dateModified": <?php echo wp_json_encode($modified_date); ?>,
-        "publisher": {
-            "@type": "Organization",
-            "name": "CosyChats",
-            "url": <?php echo wp_json_encode(home_url('/')); ?>
-        }
-    }
-</script>
 
 <?php
 get_footer();

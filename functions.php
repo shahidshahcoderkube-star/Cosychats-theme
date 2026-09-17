@@ -167,8 +167,8 @@ function cosy_enqueue_assets()
 
     // Load dedicated assets for SEO Landing Page Template ("SEO Nets")
     if (is_page_template('seo-landing-page.php')) {
-        $seo_css_ver = file_exists(get_stylesheet_directory() . '/assets/css/seo-landing.css') 
-            ? filemtime(get_stylesheet_directory() . '/assets/css/seo-landing.css') 
+        $seo_css_ver = file_exists(get_stylesheet_directory() . '/assets/css/seo-landing.css')
+            ? filemtime(get_stylesheet_directory() . '/assets/css/seo-landing.css')
             : COSYCHATS_THEME_VERSION;
 
         wp_enqueue_style(
@@ -297,3 +297,43 @@ function cosychats_get_footer_logo_url()
     // 2. Default asset URL fallback
     return esc_url(home_url('/wp-content/uploads/2026/07/logo-1.png'));
 }
+
+/**
+ * Add ACF 'choose_experience' category to Yoast SEO breadcrumbs and schema
+ *
+ * For SEO Landing Pages (seo-landing-page.php), this filter injects the selected
+ * experience post (e.g. 'New Parents') between 'Home' and the current page title
+ * in both Yoast breadcrumb navigation and the Yoast JSON-LD BreadcrumbList schema.
+ *
+ * @param array $links Existing Yoast breadcrumbs list.
+ * @return array Modified breadcrumbs list with category inserted.
+ */
+function cosychats_add_experience_to_yoast_breadcrumbs($links)
+{
+    $page_id = get_queried_object_id();
+    if (!$page_id && function_exists('get_the_ID')) {
+        $page_id = get_the_ID();
+    }
+
+    if ($page_id && get_page_template_slug($page_id) === 'seo-landing-page.php') {
+        $choose_experience = function_exists('get_field') ? get_field('choose_experience', $page_id) : null;
+
+        if (!empty($choose_experience)) {
+            $cat_title = is_object($choose_experience) ? $choose_experience->post_title : get_the_title($choose_experience);
+            $cat_slug  = is_object($choose_experience) ? $choose_experience->post_name : get_post_field('post_name', $choose_experience);
+            $cat_url   = !empty($cat_slug) ? home_url('/service-provider/' . $cat_slug . '/') : home_url('/service-provider/');
+
+            if (!empty($cat_title)) {
+                $last_item = array_pop($links);
+                $links[] = [
+                    'url'  => esc_url($cat_url),
+                    'text' => esc_html($cat_title),
+                ];
+                $links[] = $last_item;
+            }
+        }
+    }
+
+    return $links;
+}
+add_filter('wpseo_breadcrumb_links', 'cosychats_add_experience_to_yoast_breadcrumbs');

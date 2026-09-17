@@ -87,6 +87,14 @@
     letter-spacing: 0.05em;
     padding: 6px 14px;
     border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.cosy-seo-hero-badge:hover {
+    background: #f0c3ea;
+    color: var(--seo-accent-hover);
+    transform: translateY(-1px);
 }
 
 /* Article Main Heading */
@@ -96,8 +104,97 @@
     font-weight: 800;
     line-height: 1.25;
     color: var(--seo-primary);
-    margin: 0 0 28px 0;
+    margin: 0 0 16px 0;
     letter-spacing: -0.02em;
+}
+
+/* E-E-A-T Author Byline & Date Bar (Google Trust Signals) */
+.cosy-seo-byline-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 14px 20px;
+    background: #fdf7fc;
+    border: 1px solid var(--seo-accent-border);
+    border-radius: var(--seo-radius-md);
+    margin-bottom: 28px;
+}
+
+.cosy-seo-byline-author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.cosy-seo-byline-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(109, 46, 103, 0.15);
+}
+
+.cosy-seo-byline-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cosy-seo-byline-name-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.cosy-seo-byline-name {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: var(--seo-primary);
+}
+
+.cosy-seo-verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #059669;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    padding: 2px 8px;
+    border-radius: 20px;
+    line-height: 1.3;
+}
+
+.cosy-seo-verified-badge i {
+    font-size: 0.8rem;
+}
+
+.cosy-seo-byline-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.84rem;
+    color: var(--seo-muted);
+}
+
+.cosy-seo-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.cosy-seo-meta-item i {
+    color: var(--seo-accent);
+    font-size: 0.82rem;
+}
+
+.cosy-seo-meta-separator {
+    color: #cbd5e1;
 }
 
 /* ==========================================================================
@@ -457,11 +554,189 @@
 }
 
 /* ==========================================================================
-   6. Responsive Layout Breakpoints
+   7. Strategy Lead, Lived Experience & Trust Disclaimer
+   ========================================================================== */
+.cosy-seo-strategy-lead {
+    font-size: 1.08rem;
+    font-weight: 500;
+    color: #1e293b;
+    margin: 0 0 18px 0;
+}
+
+.cosy-seo-lived-body {
+    margin-bottom: 24px;
+}
+
+.cosy-seo-lived-body p {
+    margin: 0 0 18px 0;
+}
+
+/* Peer Support & Healthcare Notice (Google Quality Raters E-E-A-T) */
+.cosy-seo-trust-disclaimer {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--seo-accent);
+    border-radius: var(--seo-radius-sm);
+    padding: 16px 20px;
+    margin: 36px 0 10px;
+    font-size: 0.88rem;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.cosy-seo-disclaimer-icon {
+    font-size: 1.25rem;
+    color: var(--seo-accent);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.cosy-seo-disclaimer-text strong {
+    color: var(--seo-primary);
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   8. Internal Linking Silo (Related Guides & Topic Mesh)
+   ========================================================================== */
+.cosy-seo-related-section {
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1.5px solid #f1e5f0;
+    clear: both;
+}
+
+.cosy-seo-related-title {
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--seo-primary);
+    margin: 0 0 20px 0;
+}
+
+.cosy-seo-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.cosy-seo-related-card {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border: 1px solid var(--seo-accent-border);
+    border-radius: var(--seo-radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.cosy-seo-related-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(109, 46, 103, 0.08);
+    border-color: var(--seo-accent);
+}
+
+.cosy-seo-related-img-wrap {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    background: #fdf5fc;
+}
+
+.cosy-seo-related-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.cosy-seo-related-card:hover .cosy-seo-related-img-wrap img {
+    transform: scale(1.04);
+}
+
+.cosy-seo-related-content {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}
+
+.cosy-seo-related-content h4 {
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--seo-dark);
+    line-height: 1.4;
+    margin: 0 0 12px 0;
+}
+
+.cosy-seo-related-card:hover .cosy-seo-related-content h4 {
+    color: var(--seo-accent);
+}
+
+.cosy-seo-related-arrow {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--seo-accent);
+    margin-top: auto;
+}
+
+.cosy-seo-category-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.cosy-seo-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--seo-accent-light);
+    border: 1px solid var(--seo-accent-border);
+    color: var(--seo-primary);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.cosy-seo-chip:hover {
+    background: var(--seo-accent);
+    color: #ffffff;
+    border-color: var(--seo-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(164, 67, 144, 0.25);
+}
+
+.cosy-seo-chip i {
+    font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   9. Responsive Layout Breakpoints
    ========================================================================== */
 @media (max-width: 768px) {
     .cosy-seo-page-container {
         padding: 24px 16px 50px;
+    }
+
+    .cosy-seo-byline-bar {
+        padding: 12px 14px;
+        gap: 12px;
+    }
+
+    .cosy-seo-byline-meta {
+        flex-wrap: wrap;
+        gap: 6px;
     }
 
     .cosy-seo-featured-media-box {
@@ -485,6 +760,11 @@
         margin: 16px 0;
     }
 
+    .cosy-seo-trust-disclaimer {
+        flex-direction: column;
+        gap: 8px;
+    }
+
     .cosy-seo-bottom-article-cta {
         padding: 24px 20px;
         margin-top: 35px;
@@ -499,5 +779,9 @@
         width: 100%;
         justify-content: center;
         box-sizing: border-box;
+    }
+
+    .cosy-seo-related-grid {
+        grid-template-columns: 1fr;
     }
 }
