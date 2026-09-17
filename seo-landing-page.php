@@ -80,7 +80,7 @@ $page_url       = get_permalink();
                 </div>
                 <div class="cosy-seo-parent-caption">
                     <?php
-                    $parent_display = !empty($experience_user['user_firstname']) ? $experience_user['user_firstname'] : __('CosyChats', 'cosychats');
+                    $parent_display = !empty($experience_user['user_firstname']) ? ucfirst(trim($experience_user['user_firstname'])) : __('CosyChats', 'cosychats');
                     ?>
                     <span class="cosy-seo-caption-text"><?php echo esc_html($parent_display . ' - CosyChats Parent'); ?></span>
                 </div>
