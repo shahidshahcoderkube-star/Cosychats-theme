@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Template Name: FAQs
  *
@@ -36,7 +37,7 @@ get_header();
                                 <span><?php echo esc_html($question); ?></span>
                                 <span class="cosy-faq-toggle-icon">
                                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
                                 </span>
                             </div>
