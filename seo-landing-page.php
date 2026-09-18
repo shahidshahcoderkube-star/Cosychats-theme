@@ -39,25 +39,29 @@ $page_url       = get_permalink();
     <div class="cosy-seo-page-container">
 
         <?php
-        $category_name = !empty($choose_experience->post_title) ? $choose_experience->post_title : __('Parenting Experiences', 'cosychats');
+        $category_name = !empty($choose_experience->post_title) ? $choose_experience->post_title : '';
         $category_slug = !empty($choose_experience->post_name) ? $choose_experience->post_name : '';
-        $category_url  = !empty($category_slug) ? home_url('/service-provider/' . $category_slug . '/') : home_url('/service-provider/');
+        $category_url  = !empty($category_slug) ? home_url('/service-provider/' . $category_slug . '/') : '';
         ?>
-        <!-- 1. Breadcrumbs Navigation: Home > Parenting Experiences > Title -->
+        <!-- 1. Breadcrumbs Navigation: Home > Category > Title -->
         <nav class="cosy-seo-breadcrumbs" aria-label="<?php esc_attr_e('Breadcrumbs', 'cosychats'); ?>">
             <a href="<?php echo esc_url(home_url('/')); ?>"><?php esc_html_e('Home', 'cosychats'); ?></a>
-            <span class="separator">›</span>
-            <a href="<?php echo esc_url($category_url); ?>"><?php echo esc_html($category_name); ?></a>
+            <?php if (!empty($category_name) && !empty($category_url)) : ?>
+                <span class="separator">›</span>
+                <a href="<?php echo esc_url($category_url); ?>"><?php echo esc_html($category_name); ?></a>
+            <?php endif; ?>
             <span class="separator">›</span>
             <span class="current" aria-current="page"><?php echo esc_html($page_title); ?></span>
         </nav>
 
         <!-- 2. Category Pill Badge -->
-        <div class="cosy-seo-badge-wrap">
-            <a href="<?php echo esc_url($category_url); ?>" class="cosy-seo-hero-badge">
-                <?php echo esc_html($category_name); ?>
-            </a>
-        </div>
+        <?php if (!empty($category_name) && !empty($category_url)) : ?>
+            <div class="cosy-seo-badge-wrap">
+                <a href="<?php echo esc_url($category_url); ?>" class="cosy-seo-hero-badge">
+                    <?php echo esc_html($category_name); ?>
+                </a>
+            </div>
+        <?php endif; ?>
 
         <!-- 3. Article Main Heading -->
         <h1 class="cosy-seo-article-title"><?php echo esc_html($page_title); ?></h1>
@@ -65,7 +69,7 @@ $page_url       = get_permalink();
         <!-- 4. Editorial Article Area with Text Wrap Around Featured Image & Insert -->
         <article class="cosy-seo-article-body">
 
-            <!-- Featured Image with Parent Name underneath -->
+            <!-- Featured Image with Parent / Custom Caption underneath -->
             <div class="cosy-seo-featured-media-box">
                 <div class="cosy-seo-img-holder">
                     <?php if (has_post_thumbnail()) : ?>
@@ -78,43 +82,73 @@ $page_url       = get_permalink();
                         ]); ?>
                     <?php endif; ?>
                 </div>
-                <div class="cosy-seo-parent-caption">
-                    <?php
-                    $parent_display = !empty($experience_user['user_firstname']) ? ucfirst(trim($experience_user['user_firstname'])) : __('CosyChats', 'cosychats');
-                    ?>
-                    <span class="cosy-seo-caption-text"><?php echo esc_html($parent_display . ' - CosyChats Parent'); ?></span>
-                </div>
+                <?php
+                // Check for custom caption from ACF or native WP post thumbnail caption
+                $custom_caption = !empty($page_data['featured_image_caption'])
+                    ? $page_data['featured_image_caption']
+                    : (!empty($page_data['image_caption'])
+                        ? $page_data['image_caption']
+                        : get_the_post_thumbnail_caption());
+
+                // If no custom caption entered, fallback to user firstname if available
+                if (empty($custom_caption) && !empty($experience_user['user_firstname'])) {
+                    $custom_caption = ucfirst(trim($experience_user['user_firstname']));
+                }
+                ?>
+                <?php if (!empty($custom_caption)) : ?>
+                    <div class="cosy-seo-parent-caption">
+                        <span class="cosy-seo-caption-text"><?php echo esc_html($custom_caption); ?></span>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <!-- Article Content Flow (Direct Editorial Content without Top Distraction) -->
             <div class="cosy-seo-content-flow">
                 <?php the_content(); ?>
+
                 <!-- Daily Strategies That Make a Real Difference -->
                 <?php if (!empty($daily_strategies_heading)) : ?>
                     <h2><?php echo esc_html($daily_strategies_heading); ?></h2>
                 <?php endif; ?>
-                <p><?php echo esc_html($strategy_sub_heading); ?></p>
-                <ul class="cosy-seo-strategies-list">
-                    <?php if (!empty($daily_strategies_list)) : ?>
+                <?php if (!empty($strategy_sub_heading)) : ?>
+                    <p><?php echo esc_html($strategy_sub_heading); ?></p>
+                <?php endif; ?>
+                <?php if (!empty($daily_strategies_list)) : ?>
+                    <ul class="cosy-seo-strategies-list">
                         <?php foreach ($daily_strategies_list as $strategy) : ?>
-                            <li><strong><?php echo esc_html($strategy['strategies_title'] ?? ''); ?>:</strong> <?php echo esc_html($strategy['strategies_description'] ?? ''); ?></li>
+                            <?php
+                            $strat_title = $strategy['strategies_title'] ?? '';
+                            $strat_desc  = $strategy['strategies_description'] ?? '';
+                            if (!empty($strat_title) || !empty($strat_desc)) :
+                            ?>
+                                <li>
+                                    <?php if (!empty($strat_title)) : ?>
+                                        <strong><?php echo esc_html($strat_title); ?>:</strong>
+                                    <?php endif; ?>
+                                    <?php echo esc_html($strat_desc); ?>
+                                </li>
+                            <?php endif; ?>
                         <?php endforeach; ?>
-                    <?php endif; ?>
-                </ul>
+                    </ul>
+                <?php endif; ?>
+
                 <!-- Key Takeaways & What to Expect Card (Proper H3 Hierarchy) -->
-                <?php if (!empty($expect_list)) : ?>
+                <?php if (!empty($expect_list) || !empty($expect_heading)) : ?>
                     <div class="cosy-seo-takeaways-card">
-                        <div class="cosy-seo-takeaways-header">
-                            <i class="fa-regular fa-lightbulb"></i>
-                            <h3><?php echo esc_html($expect_heading); ?></h3>
-                        </div>
-                        <ul class="cosy-seo-takeaways-list">
-                            <?php foreach ($expect_list as $expect) : ?>
-                                <?php if (!empty($expect['add_expect_point'])) : ?>
-                                    <li><?php echo esc_html($expect['add_expect_point']); ?></li>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php if (!empty($expect_heading)) : ?>
+                            <div class="cosy-seo-takeaways-header">
+                                <h3><?php echo esc_html($expect_heading); ?></h3>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (!empty($expect_list)) : ?>
+                            <ul class="cosy-seo-takeaways-list">
+                                <?php foreach ($expect_list as $expect) : ?>
+                                    <?php if (!empty($expect['add_expect_point'])) : ?>
+                                        <li><?php echo esc_html($expect['add_expect_point']); ?></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </div>
                 <?php endif; ?>
 
@@ -127,44 +161,62 @@ $page_url       = get_permalink();
                 <?php endif; ?>
 
                 <!-- Peer Support & Healthcare Notice (Google Quality Rater E-E-A-T Requirement) -->
-                <div class="cosy-seo-trust-disclaimer">
-                    <div class="cosy-seo-disclaimer-icon">
-                        <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                <?php if (!empty($support_title) || !empty($support_description)) : ?>
+                    <div class="cosy-seo-trust-disclaimer">
+                        <div class="cosy-seo-disclaimer-icon">
+                            <i class="fa-solid fa-shield-heart" aria-hidden="true"></i>
+                        </div>
+                        <div class="cosy-seo-disclaimer-text">
+                            <?php if (!empty($support_title)) : ?>
+                                <strong><?php echo esc_html($support_title); ?></strong>
+                            <?php endif; ?>
+                            <?php if (!empty($support_description)) : ?>
+                                <span><?php echo esc_html($support_description); ?></span>
+                            <?php endif; ?>
+                        </div>
                     </div>
-                    <div class="cosy-seo-disclaimer-text">
-                        <strong><?php esc_html_e($support_title, 'cosychats'); ?></strong>
-                        <span><?php esc_html_e($support_description, 'cosychats'); ?></span>
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
 
             <div class="cosy-seo-clear"></div>
 
             <!-- 5. End-of-Article Bottom CTA Box -->
-            <div class="cosy-seo-bottom-article-cta">
-                <h3 class="cosy-seo-bottom-title"><?php echo $cta_title; ?></h3>
-                <p class="cosy-seo-bottom-desc"><?php echo $cta_sub_title; ?></p>
-                <p class="cosy-seo-bottom-highlight"><?php echo $cta_highlight; ?></p>
-                <div class="cosy-seo-bottom-links">
-                    <?php
-                    $btn_primary   = !empty($cta_button[0]['button_name']) ? $cta_button[0]['button_name'] : null;
-                    $btn_secondary = !empty($cta_button[1]['button_name']) ? $cta_button[1]['button_name'] : null;
-                    ?>
-                    <?php if (!empty($btn_primary['url']) && !empty($btn_primary['title'])) : ?>
-                        <a href="<?php echo esc_url($btn_primary['url']); ?>" class="cosy-seo-btn-bottom" <?php echo !empty($btn_primary['target']) ? ' target="' . esc_attr($btn_primary['target']) . '"' : ''; ?>>
-                            <span><?php echo esc_html($btn_primary['title']); ?></span>
-                            <span class="cosy-arrow">&rarr;</span>
-                        </a>
+            <?php
+            $btn_primary   = !empty($cta_button[0]['button_name']) ? $cta_button[0]['button_name'] : null;
+            $btn_secondary = !empty($cta_button[1]['button_name']) ? $cta_button[1]['button_name'] : null;
+            $has_cta_content = !empty($cta_title) || !empty($cta_sub_title) || !empty($cta_highlight) || (!empty($btn_primary['url']) && !empty($btn_primary['title'])) || (!empty($btn_secondary['url']) && !empty($btn_secondary['title']));
+            ?>
+            <?php if ($has_cta_content) : ?>
+                <div class="cosy-seo-bottom-article-cta">
+                    <?php if (!empty($cta_title)) : ?>
+                        <h3 class="cosy-seo-bottom-title"><?php echo esc_html($cta_title); ?></h3>
                     <?php endif; ?>
+                    <?php if (!empty($cta_sub_title)) : ?>
+                        <p class="cosy-seo-bottom-desc"><?php echo esc_html($cta_sub_title); ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($cta_highlight)) : ?>
+                        <p class="cosy-seo-bottom-highlight"><?php echo esc_html($cta_highlight); ?></p>
+                    <?php endif; ?>
+                    <?php if (!empty($btn_primary) || !empty($btn_secondary)) : ?>
+                        <div class="cosy-seo-bottom-links">
+                            <?php if (!empty($btn_primary['url']) && !empty($btn_primary['title'])) : ?>
+                                <a href="<?php echo esc_url($btn_primary['url']); ?>" class="cosy-seo-btn-bottom" <?php echo !empty($btn_primary['target']) ? ' target="' . esc_attr($btn_primary['target']) . '"' : ''; ?>>
+                                    <span><?php echo esc_html($btn_primary['title']); ?></span>
+                                    <span class="cosy-arrow">&rarr;</span>
+                                </a>
+                            <?php endif; ?>
 
-                    <?php if (!empty($btn_secondary['url']) && !empty($btn_secondary['title'])) : ?>
-                        <a href="<?php echo esc_url($btn_secondary['url']); ?>" class="cosy-seo-btn-bottom cosy-seo-btn-outline" <?php echo !empty($btn_secondary['target']) ? ' target="' . esc_attr($btn_secondary['target']) . '"' : ''; ?>>
-                            <span><?php echo esc_html($btn_secondary['title']); ?></span>
-                            <span class="cosy-arrow">&rarr;</span>
-                        </a>
+                            <?php if (!empty($btn_secondary['url']) && !empty($btn_secondary['title'])) : ?>
+                                <a href="<?php echo esc_url($btn_secondary['url']); ?>" class="cosy-seo-btn-bottom cosy-seo-btn-outline" <?php echo !empty($btn_secondary['target']) ? ' target="' . esc_attr($btn_secondary['target']) . '"' : ''; ?>>
+                                    <span><?php echo esc_html($btn_secondary['title']); ?></span>
+                                    <span class="cosy-arrow">&rarr;</span>
+                                </a>
+                            <?php endif; ?>
+                        </div>
                     <?php endif; ?>
                 </div>
-            </div>
+            <?php endif; ?>
+
             <?php
             $other_services = get_posts([
                 'post_type'      => 'cosy_service',
