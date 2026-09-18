@@ -100,7 +100,7 @@
 /* Article Main Heading */
 .cosy-seo-article-title {
     font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
-    font-size: clamp(1.85rem, 3.6vw, 2.65rem);
+    font-size: clamp(1.6rem, 3.2vw, 2.45rem);
     font-weight: 800;
     line-height: 1.25;
     color: var(--seo-primary);
@@ -258,6 +258,32 @@
     line-height: 1.78;
     color: #1e293b;
     font-weight: 500;
+}
+
+.cosy-seo-content-flow h2 {
+    font-family: var(--cosy-font-heading, 'Outfit', sans-serif);
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+    color: var(--seo-primary);
+    margin: 34px 0 14px 0;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+.cosy-seo-strategies-list {
+    margin: 0 0 26px 0;
+    padding-left: 24px;
+}
+
+.cosy-seo-strategies-list li {
+    margin-bottom: 12px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--seo-text);
+}
+
+.cosy-seo-strategies-list li strong {
+    color: #1e293b;
 }
 
 /* ==========================================================================
@@ -726,7 +752,73 @@
    ========================================================================== */
 @media (max-width: 768px) {
     .cosy-seo-page-container {
-        padding: 24px 16px 50px;
+        padding: 22px 16px 45px;
+    }
+
+    /* Headings & Typography Scale */
+    .cosy-seo-article-title {
+        font-size: 1.45rem;
+        line-height: 1.3;
+        margin-bottom: 12px;
+        letter-spacing: -0.01em;
+    }
+
+    .cosy-seo-content-flow h2 {
+        font-size: 1.25rem;
+        line-height: 1.35;
+        margin: 24px 0 10px 0;
+    }
+
+    .cosy-seo-content-flow {
+        font-size: 0.98rem;
+        line-height: 1.7;
+    }
+
+    .cosy-seo-content-flow p {
+        margin: 0 0 18px 0;
+    }
+
+    .cosy-seo-lead-paragraph {
+        font-size: 1.02rem;
+        line-height: 1.68;
+    }
+
+    .cosy-seo-strategies-list {
+        padding-left: 18px;
+        margin-bottom: 20px;
+    }
+
+    .cosy-seo-strategies-list li {
+        font-size: 0.96rem;
+        line-height: 1.62;
+        margin-bottom: 10px;
+    }
+
+    .cosy-seo-breadcrumbs {
+        font-size: 0.82rem;
+        margin-bottom: 14px;
+        gap: 6px;
+    }
+
+    .cosy-seo-hero-badge {
+        font-size: 0.78rem;
+        padding: 5px 12px;
+    }
+
+    .cosy-seo-badge-wrap {
+        margin-bottom: 10px;
+    }
+
+    .cosy-seo-parent-caption .cosy-seo-caption-text {
+        font-size: 0.85rem;
+    }
+
+    /* Layout & Media Float */
+    .cosy-seo-featured-media-box {
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 0 20px 0;
     }
 
     .cosy-seo-byline-bar {
@@ -739,18 +831,11 @@
         gap: 6px;
     }
 
-    .cosy-seo-featured-media-box {
-        float: none;
-        width: 100%;
-        max-width: 100%;
-        margin: 0 0 24px 0;
-    }
-
     .cosy-seo-mid-insert {
         float: none;
         width: 100%;
         max-width: 100%;
-        margin: 24px 0;
+        margin: 20px 0;
     }
 
     .cosy-seo-content-flow img.alignright,
@@ -760,28 +845,223 @@
         margin: 16px 0;
     }
 
+    /* Takeaways Highlight Card */
+    .cosy-seo-takeaways-card {
+        padding: 20px 18px;
+        margin: 24px 0;
+        border-radius: 14px;
+    }
+
+    .cosy-seo-takeaways-header {
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .cosy-seo-takeaways-header i,
+    .cosy-seo-takeaways-header svg,
+    .cosy-seo-takeaways-icon {
+        font-size: 1.2rem;
+    }
+
+    .cosy-seo-takeaways-header h4,
+    .cosy-seo-takeaways-header h3 {
+        font-size: 1.12rem;
+    }
+
+    .cosy-seo-takeaways-list li,
+    .cosy-seo-takeaways-card ul li {
+        font-size: 0.94rem;
+        line-height: 1.55;
+        padding-left: 24px;
+        margin-bottom: 10px;
+    }
+
+    .cosy-seo-takeaways-list li::before,
+    .cosy-seo-takeaways-card ul li::before {
+        font-size: 1.05rem;
+    }
+
+    /* Trust Disclaimer */
     .cosy-seo-trust-disclaimer {
         flex-direction: column;
         gap: 8px;
+        padding: 14px 16px;
+        margin: 26px 0 10px;
+        font-size: 0.85rem;
     }
 
+    /* Bottom CTA Box */
     .cosy-seo-bottom-article-cta {
-        padding: 24px 20px;
-        margin-top: 35px;
+        padding: 26px 18px;
+        margin-top: 32px;
+        border-radius: 14px;
+    }
+
+    .cosy-seo-bottom-title {
+        font-size: 1.25rem;
+        line-height: 1.35;
+        margin-bottom: 8px;
+    }
+
+    .cosy-seo-bottom-desc {
+        font-size: 0.94rem;
+        line-height: 1.55;
+        margin-bottom: 10px;
+    }
+
+    .cosy-seo-bottom-highlight {
+        font-size: 0.94rem;
+        margin-bottom: 18px;
     }
 
     .cosy-seo-bottom-links {
         flex-direction: column;
         width: 100%;
+        gap: 10px;
     }
 
     .cosy-seo-btn-bottom {
         width: 100%;
         justify-content: center;
         box-sizing: border-box;
+        padding: 12px 20px;
+        font-size: 0.94rem;
+    }
+
+    /* Related Silo */
+    .cosy-seo-related-section {
+        margin-top: 34px;
+        padding-top: 26px;
+    }
+
+    .cosy-seo-related-title {
+        font-size: 1.22rem;
+        margin-bottom: 14px;
+    }
+
+    .cosy-seo-category-chips {
+        gap: 8px;
+    }
+
+    .cosy-seo-chip {
+        padding: 8px 14px;
+        font-size: 0.86rem;
     }
 
     .cosy-seo-related-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Extra Small Phones (<= 480px, e.g. 343px - 390px) */
+@media (max-width: 480px) {
+    .cosy-seo-page-container {
+        padding: 16px 12px 35px;
+    }
+
+    /* Main Heading on Small Mobile */
+    .cosy-seo-article-title {
+        font-size: 1.26rem;
+        line-height: 1.32;
+        margin-bottom: 10px;
+        letter-spacing: -0.01em;
+    }
+
+    .cosy-seo-content-flow h2 {
+        font-size: 1.15rem;
+        line-height: 1.35;
+        margin: 20px 0 8px 0;
+    }
+
+    .cosy-seo-content-flow {
+        font-size: 0.94rem;
+        line-height: 1.65;
+    }
+
+    .cosy-seo-content-flow p {
+        margin: 0 0 15px 0;
+    }
+
+    .cosy-seo-lead-paragraph {
+        font-size: 0.98rem;
+        line-height: 1.62;
+    }
+
+    .cosy-seo-strategies-list {
+        padding-left: 16px;
+        margin-bottom: 18px;
+    }
+
+    .cosy-seo-strategies-list li {
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin-bottom: 9px;
+    }
+
+    .cosy-seo-breadcrumbs {
+        font-size: 0.78rem;
+        gap: 5px;
+    }
+
+    .cosy-seo-takeaways-card {
+        padding: 16px 14px;
+        margin: 20px 0;
+        border-radius: 12px;
+    }
+
+    .cosy-seo-takeaways-header h4,
+    .cosy-seo-takeaways-header h3 {
+        font-size: 1.05rem;
+    }
+
+    .cosy-seo-takeaways-list li,
+    .cosy-seo-takeaways-card ul li {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        padding-left: 22px;
+        margin-bottom: 8px;
+    }
+
+    .cosy-seo-trust-disclaimer {
+        padding: 12px 14px;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        margin: 22px 0 8px;
+    }
+
+    .cosy-seo-bottom-article-cta {
+        padding: 20px 14px;
+        margin-top: 26px;
+        border-radius: 12px;
+    }
+
+    .cosy-seo-bottom-title {
+        font-size: 1.15rem;
+    }
+
+    .cosy-seo-bottom-desc {
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    .cosy-seo-bottom-highlight {
+        font-size: 0.88rem;
+        margin-bottom: 15px;
+    }
+
+    .cosy-seo-btn-bottom {
+        padding: 11px 16px;
+        font-size: 0.9rem;
+    }
+
+    .cosy-seo-related-title {
+        font-size: 1.15rem;
+        margin-bottom: 12px;
+    }
+
+    .cosy-seo-chip {
+        padding: 7px 12px;
+        font-size: 0.82rem;
+        gap: 6px;
     }
 }
