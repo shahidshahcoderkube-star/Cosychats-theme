@@ -197,6 +197,21 @@ function cosy_enqueue_assets()
             'all'
         );
     }
+
+    // Load styles for Search Results Page
+    if (is_search()) {
+        $search_css_ver = file_exists(get_stylesheet_directory() . '/assets/css/search.css')
+            ? filemtime(get_stylesheet_directory() . '/assets/css/search.css')
+            : COSYCHATS_THEME_VERSION;
+
+        wp_enqueue_style(
+            'cosychats-search-css',
+            get_stylesheet_directory_uri() . '/assets/css/search.css',
+            array('cosychats-theme-css', 'font-awesome-6'),
+            $search_css_ver,
+            'all'
+        );
+    }
 }
 add_action('wp_enqueue_scripts', 'cosy_enqueue_assets', 15);
 
