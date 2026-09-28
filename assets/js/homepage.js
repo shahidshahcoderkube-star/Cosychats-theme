@@ -80,7 +80,7 @@ function simulateCosyAI(page = 1) {
                 // Attach event listeners to pagination buttons (Page 1, 2, 3... Prev, Next)
                 const paginationLinks = answerContent.querySelectorAll('.cosy-page-link');
                 paginationLinks.forEach(link => {
-                    link.addEventListener('click', function(e) {
+                    link.addEventListener('click', function (e) {
                         e.preventDefault();
                         const targetPage = parseInt(this.getAttribute('data-page'), 10);
                         if (targetPage && !this.closest('.page-item').classList.contains('disabled')) {
@@ -92,7 +92,7 @@ function simulateCosyAI(page = 1) {
                 try {
                     sessionStorage.setItem('cosy_ai_query', input);
                     sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
-                } catch (e) {}
+                } catch (e) { }
             } else {
                 // 6. Display fallback notice if AI finds zero relevant providers matching query
                 const fallbackHtml = `
@@ -109,7 +109,7 @@ function simulateCosyAI(page = 1) {
                 try {
                     sessionStorage.setItem('cosy_ai_query', input);
                     sessionStorage.setItem('cosy_ai_html', fallbackHtml);
-                } catch (e) {}
+                } catch (e) { }
             }
         })
         .catch(err => {
