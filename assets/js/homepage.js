@@ -75,38 +75,27 @@ function simulateCosyAI(page = 1) {
                     </a>
                 </div>
             `;
-<<<<<<< HEAD
                 answerContent.innerHTML = searchResultsHtml;
+
+                // Attach event listeners to pagination buttons (Page 1, 2, 3... Prev, Next)
+                const paginationLinks = answerContent.querySelectorAll('.cosy-page-link');
+                paginationLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const targetPage = parseInt(this.getAttribute('data-page'), 10);
+                        if (targetPage && !this.closest('.page-item').classList.contains('disabled')) {
+                            simulateCosyAI(targetPage);
+                        }
+                    });
+                });
+
                 try {
                     sessionStorage.setItem('cosy_ai_query', input);
                     sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
-                } catch (e) { }
+                } catch (e) {}
             } else {
                 // 6. Display fallback notice if AI finds zero relevant providers matching query
                 const fallbackHtml = `
-=======
-            answerContent.innerHTML = searchResultsHtml;
-
-            // Attach event listeners to pagination buttons (Page 1, 2, 3... Prev, Next)
-            const paginationLinks = answerContent.querySelectorAll('.cosy-page-link');
-            paginationLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetPage = parseInt(this.getAttribute('data-page'), 10);
-                    if (targetPage && !this.closest('.page-item').classList.contains('disabled')) {
-                        simulateCosyAI(targetPage);
-                    }
-                });
-            });
-
-            try {
-                sessionStorage.setItem('cosy_ai_query', input);
-                sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
-            } catch (e) {}
-        } else {
-            // 6. Display fallback notice if AI finds zero relevant providers matching query
-            const fallbackHtml = `
->>>>>>> 465a3f4 (feat: fetch search placeholders from ACF options page and add search/404/seo-landing templates)
                 <div class="no-providers-found text-center py-5 w-100" style="background: #fdfdfd; border: 1px dashed #d1d5db; border-radius: 12px; padding: 30px;">
                     <i class="fas fa-search fa-3x mb-3" style="color: #9ca3af;"></i>
                     <h3 style="color: #4b5563; font-weight: 600; font-size: 1.25rem;">No Specific Guides Found</h3>
@@ -116,31 +105,17 @@ function simulateCosyAI(page = 1) {
                     </a>
                 </div>
             `;
-<<<<<<< HEAD
                 answerContent.innerHTML = fallbackHtml;
                 try {
                     sessionStorage.setItem('cosy_ai_query', input);
                     sessionStorage.setItem('cosy_ai_html', fallbackHtml);
-                } catch (e) { }
+                } catch (e) {}
             }
         })
         .catch(err => {
             console.error('AI Search Error:', err);
             typingIndicator.style.display = 'none';
             answerContent.innerHTML = `
-=======
-            answerContent.innerHTML = fallbackHtml;
-            try {
-                sessionStorage.setItem('cosy_ai_query', input);
-                sessionStorage.setItem('cosy_ai_html', fallbackHtml);
-            } catch (e) {}
-        }
-    })
-    .catch(err => {
-        console.error('AI Search Error:', err);
-        typingIndicator.style.display = 'none';
-        answerContent.innerHTML = `
->>>>>>> 465a3f4 (feat: fetch search placeholders from ACF options page and add search/404/seo-landing templates)
             <div style="background:#fff; border-radius:16px; padding:24px; border:1px solid #e5e7eb; text-align:center;">
                 <p style="color:#ef4444; font-weight:600;">Unable to connect to AI Search engine. Please try again later.</p>
             </div>
