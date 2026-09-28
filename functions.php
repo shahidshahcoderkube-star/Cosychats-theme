@@ -117,21 +117,23 @@ function cosy_enqueue_assets()
             'all'
         );
 
-        // Dynamically fetch published 'cosy_service' titles to populate search bar typewriter placeholder
+        // Dynamically fetch search placeholder topics from ACF Options Page (Repeater: 'search', Sub-field: 'placeholder')
         $dynamic_topics = array();
-        if (post_type_exists('cosy_service')) {
-            $services = get_posts(array(
-                'post_type'      => 'cosy_service',
-                'posts_per_page' => 15,
-                'post_status'    => 'publish',
-                'orderby'        => 'title',
-                'order'          => 'ASC',
-            ));
-            foreach ($services as $service) {
-                $dynamic_topics[] = $service->post_title;
+        if (function_exists('get_field')) {
+            $search_rows = get_field('search', 'option');
+            if (!empty($search_rows) && is_array($search_rows)) {
+                foreach ($search_rows as $row) {
+                    if (!empty($row['placeholder'])) {
+                        $dynamic_topics[] = sanitize_text_field($row['placeholder']);
+                    }
+                }
             }
         }
 
+        // Fallback default topics if ACF options page has no rows configured yet
+        if (empty($dynamic_topics)) {
+            $dynamic_topics = array('Teenagers', 'Adoption', 'New Parents', 'IVF', 'Kids', 'Your Wellbeing', 'Baby Loss');
+        }
         // Enqueue homepage JS controller and localize AJAX config object
         wp_enqueue_script(
             'cosy-homepage-js',

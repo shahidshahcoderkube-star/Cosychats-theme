@@ -32,7 +32,7 @@
  * 5. On success: Injects matching provider card HTML from plugin's SearchController.
  * 6. On empty/error: Shows friendly fallback banner with "Browse All Parent Guides" button.
  */
-function simulateCosyAI() {
+function simulateCosyAI(page = 1) {
     const input = document.getElementById('ai-query-input').value.trim();
     if (!input) return;
 
@@ -53,6 +53,7 @@ function simulateCosyAI() {
     const formData = new FormData();
     formData.append('action', 'cosy_ai_search');
     formData.append('query', input);
+    formData.append('page', page);
 
     // 4. Send asynchronous request to WordPress AJAX endpoint (cosyAjax.ajaxurl)
     fetch(window.cosyAjax.ajaxurl, {
@@ -74,6 +75,7 @@ function simulateCosyAI() {
                     </a>
                 </div>
             `;
+<<<<<<< HEAD
                 answerContent.innerHTML = searchResultsHtml;
                 try {
                     sessionStorage.setItem('cosy_ai_query', input);
@@ -82,6 +84,29 @@ function simulateCosyAI() {
             } else {
                 // 6. Display fallback notice if AI finds zero relevant providers matching query
                 const fallbackHtml = `
+=======
+            answerContent.innerHTML = searchResultsHtml;
+
+            // Attach event listeners to pagination buttons (Page 1, 2, 3... Prev, Next)
+            const paginationLinks = answerContent.querySelectorAll('.cosy-page-link');
+            paginationLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = parseInt(this.getAttribute('data-page'), 10);
+                    if (targetPage && !this.closest('.page-item').classList.contains('disabled')) {
+                        simulateCosyAI(targetPage);
+                    }
+                });
+            });
+
+            try {
+                sessionStorage.setItem('cosy_ai_query', input);
+                sessionStorage.setItem('cosy_ai_html', searchResultsHtml);
+            } catch (e) {}
+        } else {
+            // 6. Display fallback notice if AI finds zero relevant providers matching query
+            const fallbackHtml = `
+>>>>>>> 465a3f4 (feat: fetch search placeholders from ACF options page and add search/404/seo-landing templates)
                 <div class="no-providers-found text-center py-5 w-100" style="background: #fdfdfd; border: 1px dashed #d1d5db; border-radius: 12px; padding: 30px;">
                     <i class="fas fa-search fa-3x mb-3" style="color: #9ca3af;"></i>
                     <h3 style="color: #4b5563; font-weight: 600; font-size: 1.25rem;">No Specific Guides Found</h3>
@@ -91,6 +116,7 @@ function simulateCosyAI() {
                     </a>
                 </div>
             `;
+<<<<<<< HEAD
                 answerContent.innerHTML = fallbackHtml;
                 try {
                     sessionStorage.setItem('cosy_ai_query', input);
@@ -102,6 +128,19 @@ function simulateCosyAI() {
             console.error('AI Search Error:', err);
             typingIndicator.style.display = 'none';
             answerContent.innerHTML = `
+=======
+            answerContent.innerHTML = fallbackHtml;
+            try {
+                sessionStorage.setItem('cosy_ai_query', input);
+                sessionStorage.setItem('cosy_ai_html', fallbackHtml);
+            } catch (e) {}
+        }
+    })
+    .catch(err => {
+        console.error('AI Search Error:', err);
+        typingIndicator.style.display = 'none';
+        answerContent.innerHTML = `
+>>>>>>> 465a3f4 (feat: fetch search placeholders from ACF options page and add search/404/seo-landing templates)
             <div style="background:#fff; border-radius:16px; padding:24px; border:1px solid #e5e7eb; text-align:center;">
                 <p style="color:#ef4444; font-weight:600;">Unable to connect to AI Search engine. Please try again later.</p>
             </div>
@@ -125,7 +164,6 @@ function simulateCosyAI() {
  */
 document.addEventListener('DOMContentLoaded', function () {
     const inputEl = document.getElementById('ai-query-input');
-
     // Detect if page was loaded via BROWSER BACK / FORWARD button vs FRESH RELOAD / REFRESH
     const navEntries = (window.performance && window.performance.getEntriesByType) ? window.performance.getEntriesByType('navigation') : [];
     const isBackNavigation = (navEntries.length > 0 && navEntries[0].type === 'back_forward') ||
