@@ -46,8 +46,11 @@ function simulateCosyAI(page = 1) {
     typingIndicator.style.display = 'flex';
     answerContent.innerHTML = '';
 
-    // 2. Smoothly scroll browser window down to the AI answer section
-    responseArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // 2. Smoothly scroll browser window to search bar / top of AI answer section
+    const searchWrapper = document.querySelector('.cosy-google-search-wrapper') || document.getElementById('cosy-ai-form') || responseArea;
+    if (searchWrapper) {
+        searchWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 
     // 3. Construct AJAX FormData payload for WordPress action 'cosy_ai_search'
     const formData = new FormData();
@@ -77,6 +80,11 @@ function simulateCosyAI(page = 1) {
             `;
                 answerContent.innerHTML = searchResultsHtml;
 
+                // On pagination (page > 1), ensure user is at the top of the search results
+                if (page > 1 && searchWrapper) {
+                    searchWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
                 // Attach event listeners to pagination buttons (Page 1, 2, 3... Prev, Next)
                 const paginationLinks = answerContent.querySelectorAll('.cosy-page-link');
                 paginationLinks.forEach(link => {
@@ -84,6 +92,9 @@ function simulateCosyAI(page = 1) {
                         e.preventDefault();
                         const targetPage = parseInt(this.getAttribute('data-page'), 10);
                         if (targetPage && !this.closest('.page-item').classList.contains('disabled')) {
+                            if (searchWrapper) {
+                                searchWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
                             simulateCosyAI(targetPage);
                         }
                     });
@@ -169,6 +180,22 @@ document.addEventListener('DOMContentLoaded', function () {
             sessionStorage.removeItem('cosy_ai_html');
         } catch (e) { }
     }
+
+    // Global delegated click listener for Homepage AI Search pagination buttons
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.cosy-page-link');
+        if (btn && btn.closest('#ai-answer')) {
+            e.preventDefault();
+            const targetPage = parseInt(btn.getAttribute('data-page'), 10);
+            if (targetPage && !btn.closest('.page-item').classList.contains('disabled')) {
+                const searchWrapper = document.querySelector('.cosy-google-search-wrapper') || document.getElementById('cosy-ai-form');
+                if (searchWrapper) {
+                    searchWrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                simulateCosyAI(targetPage);
+            }
+        }
+    });
 
     if (!inputEl) return;
 
